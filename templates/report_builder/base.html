@@ -1,0 +1,27 @@
+{% load static from staticfiles %}
+{% block angular_app %}
+    {% block report_header %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+
+<a href="/admin">
+    <span style="font-size: 30px; margin-left: 10px; margin-top: 10px;"
+          class="glyphicon glyphicon-chevron-left">Admin
+    </span>
+</a>
+    <div style="height: 62px">
+    {% block nav %}
+        {{ block.super }}
+    {% endblock %}
+    </div>
+    <div style="height: calc(100% - 106px); margin-top: -20px;">
+    {% block content %}
+    {% endblock %}
+    </div>
+{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+{% endblock %}

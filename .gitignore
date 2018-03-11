@@ -1,0 +1,10 @@
+envname
+db.sqlite3
+env
+static/2018
+static/avatars
+bonds.pem
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

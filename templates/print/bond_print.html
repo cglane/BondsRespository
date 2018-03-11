@@ -1,0 +1,88 @@
+{% extends "admin/change_form.html" %} {% load static %} {% block content %}
+<button class="button" id="print-submit">Print</button>
+<input id="bond-id-input" type="hidden" name="bond" value="{{bond.id}}">
+<input id="page-css" type="hidden" name="css" value="{% static 'css/custom.css' %}">
+<p id="print-instructions">
+    If the print preview does not show thw watermark, please make sure your print options allow 'background graphics'.
+</p>
+<form id="print-bond-form" action="" method="POST">
+    {% csrf_token %}
+    <div class="submit-row">
+        <input type="submit" class="default" value="Submit">
+    </div>
+</form>
+<div id="print-bond-wrapper">
+    <div id="print-bond">
+        <h5 id="power-id-top">Power Document - {{ surety_company.prefix}} {{power.id}}</h5>
+        <div id="watermark-and-content">
+            <div id="print-top-content">
+                <div id="print-header-one">
+                    <span class="bold-large">
+                        POWER AMOUNT
+                    </span>
+                    <br>
+                    <span class="bold-large">
+                        {{ power.powers_type }}
+                    </span>
+                </div>
+                <div id="print-header-two">
+                    <span>POWER OF ATTORNEY</span>
+                    <br>
+                    <span class="bold-large">{{ surety_company.title }} </span>
+                    <br>
+                    <span>{{ surety_company.address }}</span>
+                </div>
+                <div id="print-header-three">
+                    <span class="prefix-blue">{{ surety_company.prefix }}</span>
+                    <span class="power-id-red">{{ power.id }}</span>
+                </div>
+            </div>
+            <div id="print-contract-content">
+                <span id="watermark">ELECTRONIC</span>
+                <p class="contract-regular">
+                    {{ surety_company.print_content_one | safe }}
+                </p>
+                <p class="contract-blue">
+                    {{ surety_company.print_content_two | safe }}
+                </p>
+                <p class="contract-amount dollars">
+                    {{ power.print_amount_dollars }}
+                </p>
+                <p class="contract-regular">
+                    {{ surety_company.print_content_three | safe }}
+                </p>
+                <p class="contract-regular">
+                    {{ surety_company.print_content_four | safe }}
+                </p>
+            </div>
+        </div>
+        <div id="bond-bottom-page">
+            <div id="details-left">
+                <ul id="details-list">
+                    {% for item in bond.details %}
+                    <li>
+                        <span class="item-name">{{ item.name }}</span>
+                        <span class="item-value">{{ item.value }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="details-right">
+                <h1 id="expires-date">EXPIRES {{ power.print_expires_date }}</h1>
+                <img id="seal-id" alt="Seal not Found" src="{{surety_company.seal.url }}"></img>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %} {% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}" />
+<script type="text/javascript" src="{% static 'js/custom_print.js' %}"></script> {% endblock %}
+
+
+</script>
