@@ -214,20 +214,26 @@ class BondAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         # Exclude fields from form creation
         form = super(BondAdmin, self).get_form(request, obj, **kwargs)
-        print (obj, 'obj')
         if obj and obj.powers:
             powers_id = obj.powers.id
         else:
             powers_id = None
+
         if not request.user.is_superuser:
             form.base_fields['agent'].queryset = User.objects.filter(
                 id=request.user.id)
             current_power = Powers.objects.filter(id=powers_id)
             allowed_powers = Powers.objects.filter(
-                agent_id=request.user.id, bond__isnull=True, end_date_field__gte=datetime.now())
+                agent_id=request.user.id, bond__isnull=True, end_date_field__gte=datetime.now())            
             form.base_fields['powers'].queryset = current_power | allowed_powers
 
             self.readonly_fields = ('has_been_printed', )
+        else:
+            current_power = Powers.objects.filter(id=powers_id)
+            allowed_powers = Powers.objects.filter(
+                bond__isnull=True, end_date_field__gte=datetime.now()
+            )
+            form.base_fields['powers'].queryset = current_power | allowed_powers
 
         return form
 

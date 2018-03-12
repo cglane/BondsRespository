@@ -115,6 +115,8 @@ class TestAdmin(StaticLiveServerTestCase):
 		self.driver.find_element_by_id('id_warrant_number').send_keys('12222')
 		self.driver.find_element_by_id('id_offences').send_keys('Rape and Murder')
 		self.driver.find_element_by_xpath('//input[@value="Save"]').click()
+		
+		self.assertEqual(self.driver.current_url, 'http://localhost:8000/admin/powers/bond/')
 
 		# Print Bond
 		self.driver.get('http://localhost:8000/admin/')
