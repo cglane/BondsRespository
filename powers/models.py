@@ -92,7 +92,7 @@ class Powers(models.Model):
                     ('250000.00', '250000.00'), ('500000.00', '500000.00'))
     powers_type = models.CharField(max_length=50, choices=POWERS_TYPES)
     start_date_transmission = models.DateTimeField(blank=True, null=True, editable=False)
-    end_date_field = models.DateField(auto_now_add=True)
+    end_date_field = models.DateField(editable=True)
     agent = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=True, null=True)
     surety_company = models.ForeignKey(SuretyCompany, on_delete=models.CASCADE)
@@ -149,6 +149,7 @@ class Bond(models.Model):
             raise ValueError(
                 "Amount of {0} can not be greater than Powers of, {0}".format(
                     self.amount, self.powers.powers_type))
+        
         super(Bond, self).save(*args, **kwargs)
 
     def details(self):

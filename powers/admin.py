@@ -101,7 +101,7 @@ class AgentAdmin(UserAdmin):
 
 
 class PowersAdmin(admin.ModelAdmin):
-    readonly_fields = ('date_of_transmission', 'surety_company')
+    readonly_fields = ('date_of_transmission', 'surety_company', 'powers_type')
 
     def get_queryset(self, request):
         qs = super(PowersAdmin, self).get_queryset(request)
@@ -113,7 +113,7 @@ class PowersAdmin(admin.ModelAdmin):
                 'end_date_field',
                 'powers_actions',
             )
-            return qs
+            return qs.filter(end_date_field__gte=datetime.now())
         else:
             ##Don't want to give actions to agents
             self.list_display = (
@@ -121,8 +121,8 @@ class PowersAdmin(admin.ModelAdmin):
                 'end_date_field',
             )
             self.readonly_fields = ('date_of_transmission', 'surety_company',
-                                    'agent', 'powers_type')
-        return qs.filter(agent_id=request.user.id)
+                                    'agent', 'powers_type', 'end_date_field')
+        return qs.filter(agent_id=request.user.id, end_date_field__gte=datetime.now())
 
     def date_of_transmission(self, instance):
         if instance.start_date_transmission :
@@ -201,6 +201,8 @@ class PowersAdmin(admin.ModelAdmin):
 class BondAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'agent', 'issuing_date', 'has_been_printed',
                     'bond_actions')
+    search_fields = ( 'powers__powers_type',  'agent__first_name')
+
     def get_queryset(self, request):
         qs = super(BondAdmin, self).get_queryset(request)
         if not request.user.is_superuser:
@@ -222,7 +224,7 @@ class BondAdmin(admin.ModelAdmin):
                 id=request.user.id)
             current_power = Powers.objects.filter(id=powers_id)
             allowed_powers = Powers.objects.filter(
-                agent_id=request.user.id, bond__isnull=True)
+                agent_id=request.user.id, bond__isnull=True, end_date_field__gte=datetime.now())
             form.base_fields['powers'].queryset = current_power | allowed_powers
 
             self.readonly_fields = ('has_been_printed', )

@@ -30,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+POWERS_EXPIRATION = 30
+
 AUTH_USER_MODEL = 'powers.User'
 
 BOND_PRINT_CONTENT_ONE = 'KNOW ALL MEN BY THESE PRESENTS: that {0}, a cororation duly authorized and existing under the laws of the State of South Carolina does constitute and appoint the below named agent its true and lawful Attorney-In-Fact for it and in its name, place and stead, to execute, and deliver for and on its behalf, as surety, a bail bond only.'
@@ -94,6 +96,7 @@ DATABASES = {
 
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
