@@ -1,6 +1,7 @@
 from django import forms
 from powers.models import User, Powers, Bond
 import datetime
+from django.conf import settings
 
 
 class DateInput(forms.DateInput):
@@ -10,7 +11,6 @@ class DateInput(forms.DateInput):
 class TransferPowersForm(forms.Form):
     agent = forms.ModelChoiceField(
         queryset=User.objects.filter(is_active=True))
-    end_date = forms.DateField(initial=datetime.datetime.today())
 
     def save(self, powers, user):
         try:
@@ -21,7 +21,10 @@ class TransferPowersForm(forms.Form):
     def form_action(self, powers, user):
         power = Powers.objects.get(id=powers.id)
         power.agent_id = self.cleaned_data['agent']
-        power.end_date_field = self.cleaned_data['end_date']
+
+        future_date = datetime.datetime.now() + datetime.timedelta(getattr(settings, 'POWERS_EXPIRATION_TRANSFER'))
+        power.end_date_field = future_date
+
         power.start_date_transmission = datetime.datetime.now()
         power.save()
 

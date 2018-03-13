@@ -92,7 +92,7 @@ class Powers(models.Model):
                     ('250000.00', '250000.00'), ('500000.00', '500000.00'))
     powers_type = models.CharField(max_length=50, choices=POWERS_TYPES)
     start_date_transmission = models.DateTimeField(blank=True, null=True, editable=False)
-    end_date_field = models.DateField(editable=True)
+    end_date_field = models.DateField(editable=False)
     agent = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=True, null=True)
     surety_company = models.ForeignKey(SuretyCompany, on_delete=models.CASCADE)
@@ -117,6 +117,7 @@ class Bond(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     defendant = models.ForeignKey(Defendant, on_delete=models.CASCADE)
     has_been_printed = models.BooleanField(default=False)
+    voided = models.NullBooleanField(default=False)
     agent = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -132,7 +133,8 @@ class Bond(models.Model):
         auto_now_add=True,
         help_text="This will automatically be set when bond is printed")
     amount = models.FloatField()
-    premium = models.FloatField()
+    premium = models.FloatField(editable=False)
+    bond_fee = models.FloatField()
     related_court = models.CharField(max_length=50)
     county = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
@@ -149,7 +151,7 @@ class Bond(models.Model):
             raise ValueError(
                 "Amount of {0} can not be greater than Powers of, {0}".format(
                     self.amount, self.powers.powers_type))
-        
+        self.premium = self.amount * getattr(settings, 'BOND_PREMIUM')
         super(Bond, self).save(*args, **kwargs)
 
     def details(self):
@@ -165,9 +167,6 @@ class Bond(models.Model):
         }, {
             'name': 'Case Number',
             'value': self.warrant_number
-        }, {
-            'name': 'Premium',
-            'value': '${:,.2f}'.format(self.premium)
         }, {
             'name': 'County',
             'value': self.county

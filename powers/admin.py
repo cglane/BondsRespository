@@ -104,6 +104,9 @@ class PowersAdmin(admin.ModelAdmin):
     readonly_fields = ('date_of_transmission', 'surety_company', 'powers_type')
 
     def get_queryset(self, request):
+        """
+        Only want powers that have end date in future to appear
+        """
         qs = super(PowersAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             self.list_display = (
@@ -199,8 +202,9 @@ class PowersAdmin(admin.ModelAdmin):
 
 
 class BondAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'agent', 'issuing_date', 'has_been_printed',
-                    'bond_actions')
+
+    list_display = ('__str__', 'agent', 'issuing_date', 'voided','has_been_printed',
+                    'bond_actions', )
     search_fields = ( 'powers__powers_type',  'agent__first_name')
 
     def get_queryset(self, request):
@@ -212,7 +216,9 @@ class BondAdmin(admin.ModelAdmin):
         return qs
 
     def get_form(self, request, obj=None, **kwargs):
-        # Exclude fields from form creation
+        """
+        Only want powers that have end date in future to appear
+        """
         form = super(BondAdmin, self).get_form(request, obj, **kwargs)
         if obj and obj.powers:
             powers_id = obj.powers.id
@@ -234,7 +240,7 @@ class BondAdmin(admin.ModelAdmin):
                 bond__isnull=True, end_date_field__gte=datetime.now()
             )
             form.base_fields['powers'].queryset = current_power | allowed_powers
-
+            self.readonly_fields = ('premium',)
         return form
 
 
