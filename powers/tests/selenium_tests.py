@@ -107,7 +107,7 @@ class TestAdmin(StaticLiveServerTestCase):
 		select_powers.select_by_index(2)
 
 		self.driver.find_element_by_id('id_amount').send_keys(10)
-		self.driver.find_element_by_id('id_premium').send_keys(10)
+		self.driver.find_element_by_id('id_bond_fee').send_keys(10)
 		self.driver.find_element_by_id('id_related_court').send_keys('charleston')
 		self.driver.find_element_by_id('id_county').send_keys('charleston')
 		self.driver.find_element_by_id('id_city').send_keys('charleston')

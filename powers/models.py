@@ -111,6 +111,12 @@ class Powers(models.Model):
     def print_expires_date(self):
         return self.end_date_field.strftime('%m/%d/%Y')
 
+    @property
+    def powers_type_formatted(self):
+        print (type(self.powers_type), 'type')
+        if self.powers_type:
+            return int(float(self.powers_type) / 1000)
+        return ''
 
 
 class Bond(models.Model):

@@ -13,7 +13,7 @@
 </form>
 <div id="print-bond-wrapper">
     <div id="print-bond">
-        <h5 id="power-id-top">Power Document - {{ surety_company.prefix}} {{power.powers_type}} {{power.id}}</h5>
+        <h5 id="power-id-top">Power Document - {{ surety_company.prefix}} {{power.powers_type_formatted}} {{power.id}}</h5>
         <div id="watermark-and-content">
             <div id="print-top-content">
                 <div id="print-header-one">
@@ -34,7 +34,7 @@
                 </div>
                 <div id="print-header-three">
                     <span class="prefix-blue">{{ surety_company.prefix }}</span>
-                    <span>{{power.powers_type}}</span>
+                    <span>{{power.powers_type_formatted}} </span>
                     <span class="power-id-red">{{ power.id }}</span>
                 </div>
             </div>
