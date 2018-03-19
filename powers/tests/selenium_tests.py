@@ -74,7 +74,7 @@ class TestAdmin(StaticLiveServerTestCase):
 		select = Select(self.driver.find_element_by_name('agent'))
 		select.select_by_index(1)
 		self.driver.find_element_by_xpath('//input[@value="Submit"]').click()
-		self.assertEqual(self.driver.current_url ,'http://localhost:8000/admin/powers/powers/')
+		self.assertEqual(self.driver.current_url ,'http://localhost:8000/powers/powers/')
 
 		## Edit Defendant
 		self.driver.get('http://localhost:8000/admin/')
@@ -88,7 +88,7 @@ class TestAdmin(StaticLiveServerTestCase):
 		datepicker.clear()
 		datepicker.send_keys('2019-10-20')
 		self.driver.find_element_by_xpath('//input[@value="Save"]').click()
-		self.assertEqual(self.driver.current_url, 'http://localhost:8000/admin/powers/defendant/')
+		self.assertEqual(self.driver.current_url, 'http://localhost:8000/powers/defendant/')
 
 		## Create Bond
 		self.driver.get('http://localhost:8000/admin/')
@@ -116,7 +116,7 @@ class TestAdmin(StaticLiveServerTestCase):
 		self.driver.find_element_by_id('id_offences').send_keys('Rape and Murder')
 		self.driver.find_element_by_xpath('//input[@value="Save"]').click()
 		
-		self.assertEqual(self.driver.current_url, 'http://localhost:8000/admin/powers/bond/')
+		self.assertEqual(self.driver.current_url, 'http://localhost:8000/powers/bond/')
 
 		# Print Bond
 		self.driver.get('http://localhost:8000/admin/')

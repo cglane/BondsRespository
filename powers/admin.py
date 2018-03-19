@@ -27,8 +27,7 @@ from powers.models import (
 
 local_tz = pytz.timezone('US/Eastern')
 
-# admin.site.site_header = 'Sinkler Bonding Admin'
-admin.site.site_header = 'Hello World'
+admin.site.site_header = 'Sinkler Bonding Admin'
 
 class SuretyAdmin(admin.ModelAdmin):
     pass
