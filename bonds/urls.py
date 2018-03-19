@@ -17,10 +17,36 @@ from django.conf.urls import url, include
 
 from django.contrib import admin
 from django.conf import settings
+from django.contrib.auth.views import login
+
 
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    url(
+        r'^login/$',
+        login,
+        {
+            'template_name': 'admin/login.html',
+            'extra_context': {
+                # Your extra variables here as key value pairs.
+                'title': getattr(settings, 'LOGIN_HEADER')
+            }
+        },
+        name='login'
+    ),
     url(r'^', admin.site.urls),
+    url(
+        r'^admin/login/$',
+        login,
+        {
+            'template_name': 'admin/login.html',
+            'extra_context': {
+                # Your extra variables here as key value pairs.
+                'title': getattr(settings, 'LOGIN_HEADER')
+            }
+        },
+        name='login'
+    ),
     url(r'^admin/', admin.site.urls),
     url(r'^report_builder/', include('report_builder.urls'))
 ]
