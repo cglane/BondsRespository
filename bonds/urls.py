@@ -20,6 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    url(r'^', admin.site.urls),
     url(r'^admin/', admin.site.urls),
     url(r'^report_builder/', include('report_builder.urls'))
 ]

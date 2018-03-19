@@ -38,7 +38,7 @@ BOND_PREMIUM = .00781
 
 AUTH_USER_MODEL = 'powers.User'
 
-BOND_PRINT_CONTENT_ONE = 'KNOW ALL MEN BY THESE PRESENTS: that {0}, a cororation duly authorized and existing under the laws of the State of South Carolina does constitute and appoint the below named agent its true and lawful Attorney-In-Fact for it and in its name, place and stead, to execute, and deliver for and on its behalf, as surety, a bail bond only.'
+BOND_PRINT_CONTENT_ONE = 'KNOW ALL MEN BY THESE PRESENTS: that {0}, a corporation duly authorized and existing under the laws of the State of South Carolina does constitute and appoint the below named agent its true and lawful Attorney-In-Fact for it and in its name, place and stead, to execute, and deliver for and on its behalf, as surety, a bail bond only.'
 
 BOND_PRINT_CONTENT_TWO = 'Authority of such a Attorney-In-Fact is limited to appearance bonds. No authority is provided herein for the execution of surety immigration bonds or to guarantee alimony payments, fines, wage law claims or other payments of any kind on behalf of below named defendant. The named agent is appointed only to execute the bond consistent with the terms of this power of attorney. The agents is not authorized to act as agent for receipt of service of process in any criminal or civil action. This power is void if altered or erased or used in any combination with other powers of attorney of the company or any other company to obtain the release of the defendant named below or to satisfy any bond requirement in excess of the stated face amount of this power. This power can only be used once. The obligation of the company shall not exceed the sum of'
 
@@ -93,23 +93,23 @@ WSGI_APPLICATION = 'bonds.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
-    }
-}
 # DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'ebdb',
-#        'USER': 'postgres',
-#        'PASSWORD': os.environ.get('BOND_PASSWORD'),
-#        'HOST': os.environ.get('BOND_HOST'),
-#        'PORT': '5432',
-#    }
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+#     }
 # }
+DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'NAME': 'ebdb',
+       'USER': 'postgres',
+       'PASSWORD': os.environ.get('BOND_PASSWORD'),
+       'HOST': os.environ.get('BOND_HOST'),
+       'PORT': '5432',
+   }
+}
 
 
 # Password validation
