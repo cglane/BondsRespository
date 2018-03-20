@@ -29,7 +29,8 @@ urlpatterns = [
             'template_name': 'admin/login.html',
             'extra_context': {
                 # Your extra variables here as key value pairs.
-                'title': getattr(settings, 'LOGIN_HEADER')
+                'title': getattr(settings, 'LOGIN_HEADER'),
+                'debug': getattr(settings, 'DEBUG')
             }
         },
         name='login'
