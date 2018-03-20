@@ -20,21 +20,6 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-      console.log('hello')
-       console.log('hello again')
-      {% if debug == False %}
-      if (window.location.protocol != "https:") {
-         window.location.protocol = "https:";
-         window.location.reload();
-      }
-      {% endif %}
-    })
-
-</script>
 
 {% if form.errors and not form.non_field_errors %}
 <p class="errornote">
