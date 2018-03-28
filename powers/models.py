@@ -145,7 +145,7 @@ class Bond(models.Model):
     county = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=20, )
-    warrant_number = models.CharField(max_length=50)
+    warrant_number = models.TextField()
     offences = models.TextField()
 
     def __str__(self):
