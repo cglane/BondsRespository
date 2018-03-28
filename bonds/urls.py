@@ -18,9 +18,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.auth.views import login
+from django.views.generic.base import RedirectView
+from django.core.urlresolvers import reverse
 
 
 urlpatterns = [
+    ## Force page to go to admin site
+    url(r'^$', RedirectView.as_view(url='/admin')),
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     url(
         r'^login/$',
@@ -35,7 +39,7 @@ urlpatterns = [
         },
         name='login'
     ),
-    url(r'^', admin.site.urls),
+    url(r'^report_builder/', include('report_builder.urls')),
     url(
         r'^admin/login/$',
         login,
@@ -49,5 +53,4 @@ urlpatterns = [
         name='login'
     ),
     url(r'^admin/', admin.site.urls),
-    url(r'^report_builder/', include('report_builder.urls'))
 ]
