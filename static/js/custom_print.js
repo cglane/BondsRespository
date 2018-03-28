@@ -3,7 +3,7 @@
 (function($) {
     $(document).ready(function() {
         var printHtml = function (html, css, callback) {
-            var hiddenFrame = $('<iframe style="display: none"></iframe>').appendTo('body')[0];
+            var hiddenFrame = $('<iframe style="display: block"></iframe>').appendTo('body')[0];
             hiddenFrame.contentWindow.printAndRemove = function() {
                 hiddenFrame.contentWindow.print();
                 $(hiddenFrame).remove();

@@ -14,6 +14,6 @@ git add .
 
 git commit -m 'deploy'
 
-# echo "yes" | python manage.py collectstatic
+echo "yes" | python manage.py collectstatic
 
 eb deploy

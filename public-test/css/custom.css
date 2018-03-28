@@ -1,0 +1,143 @@
+#print-bond-form {
+    display: none;
+}
+#print-submit {
+    font-size: 2.1em;
+    margin-left:900px;
+    margin-bottom: 10px;
+}
+#print-bond {
+    background:white;
+    padding-top: 100px;
+    width: 1000px;
+    -webkit-print-color-adjust: exact;
+
+}
+#power-id-top {
+    width: 90%;
+    height: auto;
+    margin: auto;
+    text-align: right;
+}
+#watermark-and-content {
+    width: 90%;
+    margin: auto;
+    height: inherit;
+    padding: 20px;
+    overflow: hidden;
+    background-color:#C6F0F6 ;
+    background:#C6F0F6 url("climpek.png")
+    
+}
+
+#watermark {
+    width: 900px;
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 130px;
+    opacity: .1;
+    top: 340px;
+    position: absolute;
+
+}
+
+
+
+#print-top-content {
+    height: 10%;
+    width:100%;
+}
+#print-top-content > div {
+    width: 31%;
+    display: inline-block;
+    height: 100px;
+    vertical-align: top;
+    margin-top: 2%;
+    font-size: 17px;
+}
+
+.bold-large {
+    font-weight:bold;
+    font-size: 1.3em; 
+}
+#print-header-two {
+    text-align: center;
+}
+#print-header-three {
+    text-align: right;
+}
+
+#print-contract-content {
+    padding: 10px;
+    font-size: 18px;
+}
+#bond-bottom-page {
+    width: 90%;
+    margin: auto;
+    height: inherit;
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+#bond-bottom-page > div {
+    width: 48%;
+    display: inline-block;
+    vertical-align: top;
+}
+#details-list {
+    list-style-type: none;
+}
+#details-list > li{
+    list-style: none;
+    margin: 14px;
+}
+#details-list > li  > span{
+    width: 49%;
+    color:black;
+    display: inline-block;
+    font-size: 14px;
+}
+#details-right {
+    text-align: right;
+}
+#expires-date {
+    color: red;
+}
+#seal-id {
+    width: 250px;
+}
+.power-id-red {
+    color: red;
+}
+
+.power-prefix-blue {
+    color: blue;
+}
+
+.contract-regular {
+    color: black;
+}
+.dollars {
+    text-align: center;
+}
+.long-date {
+    color: black;
+    font-weight: bold;
+}
+@page {
+    margin: 0;
+}
+@media print {
+    #watermark-and-content {
+        width: 90%;
+        margin: auto;
+        height: inherit;
+        padding: 20px;
+        overflow: hidden;
+        background-color:#C6F0F6 ;
+        background:#C6F0F6 url("climpek.png")
+        -webkit-print-color-adjust: exact; 
+
+    }
+}
