@@ -101,6 +101,8 @@ class AgentAdmin(UserAdmin):
 
 class PowersAdmin(admin.ModelAdmin):
     readonly_fields = ('date_of_transmission', 'surety_company', 'powers_type')
+    def has_add_permission(self, request):
+        return False
 
     def get_queryset(self, request):
         """
@@ -114,6 +116,7 @@ class PowersAdmin(admin.ModelAdmin):
                 'date_of_transmission',
                 'end_date_field',
                 'powers_actions',
+                'currently_used'
             )
             return qs.filter(end_date_field__gte=datetime.now())
         else:
@@ -125,6 +128,12 @@ class PowersAdmin(admin.ModelAdmin):
             self.readonly_fields = ('date_of_transmission', 'surety_company',
                                     'agent', 'powers_type', 'end_date_field')
         return qs.filter(agent_id=request.user.id, end_date_field__gte=datetime.now())
+
+    def currently_used(self, instance):
+        bond = Bond.objects.get(powers=instance.id)
+        if bond:
+            return bond
+        return False
 
     def date_of_transmission(self, instance):
         if instance.start_date_transmission :
@@ -254,6 +263,11 @@ class BondAdmin(admin.ModelAdmin):
 
         return custom_urls + urls
 
+    def make_voided(self, request, queryset):
+        queryset.update(voided=True)
+
+    make_voided.short_description = "Set bond to voided"
+
     def bond_actions(self, obj):
         if not obj.has_been_printed:
             return format_html('<a class="button" href="{}">Print Bond</a>',
@@ -290,6 +304,7 @@ class BondAdmin(admin.ModelAdmin):
             'print/bond_print.html',
             context,
         )
+    actions = [make_voided, ]
 
 
 admin.site.register(SuretyCompany, SuretyAdmin)

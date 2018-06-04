@@ -77,7 +77,7 @@ class User(AbstractUser):
 class Defendant(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    next_court_date = models.DateField()
+    next_court_date = models.CharField(max_length=50)
     agents = models.ManyToManyField(User, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 

@@ -28,6 +28,13 @@ class TransferPowersForm(forms.Form):
         power.start_date_transmission = datetime.datetime.now()
         power.save()
 
+class BondVoidForm(forms.Form):
+    def save(self, bond, user):
+        try:
+            self.form_action(bond, user)
+        except:
+            raise forms.ValidationError("Failed to save form.")
+
 
 class BondPrintForm(forms.Form):
     def save(self, bond, user):
