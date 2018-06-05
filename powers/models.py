@@ -165,6 +165,9 @@ class Bond(models.Model):
             'name': 'Bond Amount',
             'value': '${:,.2f}'.format(self.amount)
         }, {
+            'name': 'Bond Premium',
+            'value': '${:,.2f}'.format(self.bond_fee)
+        },{
             'name': 'Defendant',
             'value': self.defendant
         }, {

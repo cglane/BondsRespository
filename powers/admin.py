@@ -27,8 +27,9 @@ from powers.models import (
 
 local_tz = pytz.timezone('US/Eastern')
 
-admin.site.site_header = 'Sinkler Bonding Admin'
-
+admin.site.site_header = 'Shelmore Surety Admin'
+admin.site.index_title = 'Shelmore Surety Admin'
+admin.site.site_title = 'Shelmore Surety Admin'
 class SuretyAdmin(admin.ModelAdmin):
     pass
 
@@ -299,6 +300,7 @@ class BondAdmin(admin.ModelAdmin):
         context['power'] = Powers.objects.get(id=bond.powers.id)
         context['surety_company'] = SuretyCompany.objects.all()[0]
         context['title'] = 'Print Bond'
+
         return TemplateResponse(
             request,
             'print/bond_print.html',
