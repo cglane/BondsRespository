@@ -126,6 +126,9 @@
     color: black;
     font-weight: bold;
 }
+.item-name{
+vertical-align:top;
+}
 @page {
     margin: 0;
 }

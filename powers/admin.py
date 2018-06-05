@@ -213,7 +213,7 @@ class PowersAdmin(admin.ModelAdmin):
 class BondAdmin(admin.ModelAdmin):
 
     list_display = ('__str__', 'agent', 'issuing_date', 'voided','has_been_printed',
-                    'bond_actions', )
+                    'bond_actions', 'make_voided')
     search_fields = ( 'powers__powers_type',  'agent__first_name')
 
     def get_queryset(self, request):
@@ -259,15 +259,32 @@ class BondAdmin(admin.ModelAdmin):
         custom_urls = [
             url(r'^(?P<bond_id>.+)/print/$',
                 self.admin_site.admin_view(self.bond_print),
-                name='bond_print')
+                name='bond_print'),
+            url(r'^(?P<bond_id>.+)/bond_void_view/$',
+                self.admin_site.admin_view(self.bond_void_view),
+                name='bond_void_view'),                
         ]
 
         return custom_urls + urls
 
     def make_voided(self, request, queryset):
         queryset.update(voided=True)
-
+    
     make_voided.short_description = "Set bond to voided"
+
+    def make_voided(self, obj):
+        if not obj.voided:
+            return format_html('<a class="button" href="{}">Make Voided</a>',
+                               reverse('admin:bond_void_view', args=[obj.pk]))
+
+    def bond_void_view(self, request, bond_id, *args, **kwargs):
+        bond = self.get_object(request, bond_id)
+        bond.voided = True
+        bond.save()
+
+        self.message_user(request, 'Success')
+        url = reverse('admin:powers_bond_changelist', )
+        return HttpResponseRedirect(url)
 
     def bond_actions(self, obj):
         if not obj.has_been_printed:
