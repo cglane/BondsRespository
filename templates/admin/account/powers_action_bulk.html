@@ -1,0 +1,34 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block content %}
+    <form action="" method="post">
+
+        {% csrf_token %}
+        <input type="hidden" name="action" value="transfer_group">
+        <input type="hidden" name="do_action" value="yes">
+
+        <div>
+            {{ form.agent }}
+            <input type="submit" class="default" style="float: none" value="Transfer">
+            {{ form.agent.errors }}
+        </div>
+
+        <h2>Transfer power to agent</h2>
+
+        <ul>
+            {% for object in objects %}
+                <li>
+
+                    <a href="{{ object.pk }}/"> {{object}}</a>
+                    <input type="hidden" name="_selected_action" value="{{ object.pk }}">
+                </li>
+            {% endfor %}
+        </ul>
+
+    </form>
+{% endblock %}
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> {% endblock %}

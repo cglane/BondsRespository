@@ -49,6 +49,12 @@ BOND_PRINT_CONTENT_THREE = 'and provided this Power-Of-Attorney is filed with th
 BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this <span class='long-date'>{1}</span>."
 # Application definition
 
+POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
+                ('25000.00', '25000.00'), ('50000.00', '50000.00'),
+                ('100000.00', '100000.00'), ('150000.00', '150000.00'),
+                ('250000.00', '250000.00'), ('500000.00', '500000.00'))
+
+
 INSTALLED_APPS = [
     'report_builder','jet', 'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',

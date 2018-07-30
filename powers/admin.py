@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 from django.conf.urls import include, url
 from django.shortcuts import redirect
 from itertools import chain
-
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from powers.forms import TransferPowersForm, BondPrintForm
+from powers.forms import TransferPowersForm, BondPrintForm, AgentForm, PowersBatchForm
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from powers.utils import create_powers_batch
+from powers.utils import create_powers_batch_custom
 import pytz
+from django.shortcuts import render
 
 from powers.models import (
     SuretyCompany,
@@ -165,9 +166,21 @@ class PowersAdmin(admin.ModelAdmin):
         return custom_urls + urls
 
     def create_batch(self, request, *args, **kwargs):
-        create_powers_batch()
-        url = reverse('admin:powers_powers_changelist', )
-        return HttpResponseRedirect(url)
+        if 'do_action' in request.POST:
+            form = PowersBatchForm(request.POST)
+            if form.is_valid():
+                create_powers_batch_custom(request.POST['number'], request.POST['type'])
+                self.message_user(request, 'Success')
+                return redirect('/admin/powers/powers')
+        else:
+            form = PowersBatchForm()
+
+        return render(request, 'admin/account/create_batch_form.html',
+                      {'title': u'Create a Batch',
+                       'form': form})
+        # create_powers_batch()
+        # url = reverse('admin:powers_powers_changelist', )
+        # return HttpResponseRedirect(url)
 
     def powers_actions(self, obj):
         return format_html('<a class="button" href="{}">Transfer</a>',
@@ -205,7 +218,27 @@ class PowersAdmin(admin.ModelAdmin):
             'admin/account/powers_action.html',
             context,
         )
+    def transfer_group(self, request, queryset):
+        if 'do_action' in request.POST:
+            form = AgentForm(request.POST)
+            if form.is_valid():
+                agent = form.cleaned_data['agent']
+                future_date = datetime.now() + timedelta(
+                    getattr(settings, 'POWERS_EXPIRATION_TRANSFER'))
+                updated = queryset.update(agent=agent,
+                                          end_date_field=future_date,
+                                          start_date_transmission = datetime.now()
+                                          )
+                self.message_user(request, 'Success')
+                return
+        else:
+            form = AgentForm()
 
+        return render(request, 'admin/account/powers_action_bulk.html',
+            {'title': u'Choose an Agent',
+             'objects': queryset,
+             'form': form})
+    actions = [transfer_group, ]
 
 
 
