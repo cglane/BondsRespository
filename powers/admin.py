@@ -103,8 +103,11 @@ class AgentAdmin(UserAdmin):
 
 class PowersAdmin(admin.ModelAdmin):
     readonly_fields = ('date_of_transmission', 'surety_company', 'powers_type')
+    list_filter = ('end_date_field', 'powers_type', 'agent')
+
     def has_add_permission(self, request):
         return False
+
 
     def get_queryset(self, request):
         """
@@ -112,13 +115,14 @@ class PowersAdmin(admin.ModelAdmin):
         """
         qs = super(PowersAdmin, self).get_queryset(request)
         if request.user.is_superuser:
+
             self.list_display = (
                 '__str__',
                 'agent_name',
                 'date_of_transmission',
                 'end_date_field',
                 'powers_actions',
-                'currently_used'
+                'currently_used',
             )
             return qs.filter(end_date_field__gte=datetime.now())
         else:
@@ -126,9 +130,11 @@ class PowersAdmin(admin.ModelAdmin):
             self.list_display = (
                 '__str__',
                 'end_date_field',
+                'date_of_transmission',
+                'powers_type'
             )
             self.readonly_fields = ('date_of_transmission', 'surety_company',
-                                    'agent', 'powers_type', 'end_date_field')
+                                    'agent', 'powers_type', 'end_date_field', )
         return qs.filter(agent_id=request.user.id, end_date_field__gte=datetime.now())
 
     def currently_used(self, instance):
@@ -238,9 +244,15 @@ class PowersAdmin(admin.ModelAdmin):
             {'title': u'Choose an Agent',
              'objects': queryset,
              'form': form})
+
+    def get_actions(self, request):
+        actions = super(PowersAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            if 'transfer_group' in actions:
+                del actions['transfer_group']
+        return actions
+
     actions = [transfer_group, ]
-
-
 
 
 class BondAdmin(admin.ModelAdmin):

@@ -15,6 +15,7 @@ def create_powers_batch_custom(number, type):
     surety = SuretyCompany.objects.all()
     future_date = datetime.datetime.now() + datetime.timedelta(getattr(settings, 'POWERS_EXPIRATION'))
 
+
     for iter in range(int(number)):
         p_dict = {'powers_type': type, 'surety_company': surety[0], 'end_date_field': future_date}
         power = Powers(**p_dict)
