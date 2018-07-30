@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 from django.conf.urls import include, url
 from django.shortcuts import redirect
 from itertools import chain
-
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from powers.forms import TransferPowersForm, BondPrintForm
+from powers.forms import TransferPowersForm, BondPrintForm, AgentForm, PowersBatchForm
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from powers.utils import create_powers_batch
+from powers.utils import create_powers_batch_custom
 import pytz
+from django.shortcuts import render
 
 from powers.models import (
     SuretyCompany,
@@ -102,8 +103,11 @@ class AgentAdmin(UserAdmin):
 
 class PowersAdmin(admin.ModelAdmin):
     readonly_fields = ('date_of_transmission', 'surety_company', 'powers_type')
+    list_filter = ('end_date_field', 'powers_type', 'agent')
+
     def has_add_permission(self, request):
         return False
+
 
     def get_queryset(self, request):
         """
@@ -111,13 +115,14 @@ class PowersAdmin(admin.ModelAdmin):
         """
         qs = super(PowersAdmin, self).get_queryset(request)
         if request.user.is_superuser:
+
             self.list_display = (
                 '__str__',
                 'agent_name',
                 'date_of_transmission',
                 'end_date_field',
                 'powers_actions',
-                'currently_used'
+                'currently_used',
             )
             return qs.filter(end_date_field__gte=datetime.now())
         else:
@@ -125,9 +130,11 @@ class PowersAdmin(admin.ModelAdmin):
             self.list_display = (
                 '__str__',
                 'end_date_field',
+                'date_of_transmission',
+                'powers_type'
             )
             self.readonly_fields = ('date_of_transmission', 'surety_company',
-                                    'agent', 'powers_type', 'end_date_field')
+                                    'agent', 'powers_type', 'end_date_field', )
         return qs.filter(agent_id=request.user.id, end_date_field__gte=datetime.now())
 
     def currently_used(self, instance):
@@ -165,9 +172,21 @@ class PowersAdmin(admin.ModelAdmin):
         return custom_urls + urls
 
     def create_batch(self, request, *args, **kwargs):
-        create_powers_batch()
-        url = reverse('admin:powers_powers_changelist', )
-        return HttpResponseRedirect(url)
+        if 'do_action' in request.POST:
+            form = PowersBatchForm(request.POST)
+            if form.is_valid():
+                create_powers_batch_custom(request.POST['number'], request.POST['type'])
+                self.message_user(request, 'Success')
+                return redirect('/admin/powers/powers')
+        else:
+            form = PowersBatchForm()
+
+        return render(request, 'admin/account/create_batch_form.html',
+                      {'title': u'Create a Batch',
+                       'form': form})
+        # create_powers_batch()
+        # url = reverse('admin:powers_powers_changelist', )
+        # return HttpResponseRedirect(url)
 
     def powers_actions(self, obj):
         return format_html('<a class="button" href="{}">Transfer</a>',
@@ -205,9 +224,35 @@ class PowersAdmin(admin.ModelAdmin):
             'admin/account/powers_action.html',
             context,
         )
+    def transfer_group(self, request, queryset):
+        if 'do_action' in request.POST:
+            form = AgentForm(request.POST)
+            if form.is_valid():
+                agent = form.cleaned_data['agent']
+                future_date = datetime.now() + timedelta(
+                    getattr(settings, 'POWERS_EXPIRATION_TRANSFER'))
+                updated = queryset.update(agent=agent,
+                                          end_date_field=future_date,
+                                          start_date_transmission = datetime.now()
+                                          )
+                self.message_user(request, 'Success')
+                return
+        else:
+            form = AgentForm()
 
+        return render(request, 'admin/account/powers_action_bulk.html',
+            {'title': u'Choose an Agent',
+             'objects': queryset,
+             'form': form})
 
+    def get_actions(self, request):
+        actions = super(PowersAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            if 'transfer_group' in actions:
+                del actions['transfer_group']
+        return actions
 
+    actions = [transfer_group, ]
 
 
 class BondAdmin(admin.ModelAdmin):

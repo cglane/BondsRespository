@@ -7,6 +7,12 @@ from django.conf import settings
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+class PowersBatchForm(forms.Form):
+    number = forms.IntegerField()
+    type = forms.ChoiceField(choices=getattr(settings, 'POWERS_TYPES'))
+
+class AgentForm(forms.Form):
+    agent = forms.ModelChoiceField(queryset=User.objects.all())
 
 class TransferPowersForm(forms.Form):
     agent = forms.ModelChoiceField(

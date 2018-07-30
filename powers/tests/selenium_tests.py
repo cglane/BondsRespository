@@ -64,8 +64,15 @@ class TestAdmin(StaticLiveServerTestCase):
 		batch_link = self.driver.find_element_by_link_text('Create Batch')
 		batch_link.click()
 
-		all_powers = self.driver.find_elements_by_tag_name("tr")
-		self.assertTrue(len(all_powers) > 8)
+		number_powers = self.driver.find_element_by_id('id_number')
+		number_powers.send_keys('2')
+
+		value_powers = Select(self.driver.find_element_by_name('type'))
+		value_powers.select_by_index(1)
+
+		self.driver.find_element_by_xpath('//input[@value="Create Batch"]').click()
+
+
 
 		## Transfer Powers
 		transfer_link = self.driver.find_element_by_link_text('Transfer')
