@@ -2,7 +2,407 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a538efa8-3649-4e2f-bd0e-eb554545239b" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/css/base.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/css/changelists.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/css/dashboard.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/css/fonts.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/css/forms.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/css/login.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/css/rtl.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/css/widgets.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/fonts/LICENSE.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/fonts/README.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/fonts/Roboto-Bold-webfont.woff" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/fonts/Roboto-Light-webfont.woff" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/fonts/Roboto-Regular-webfont.woff" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/LICENSE" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/README.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/calendar-icons.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/gis/move_vertex_off.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/gis/move_vertex_on.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-addlink.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-alert.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-calendar.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-changelink.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-clock.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-deletelink.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-no.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-unknown-alt.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-unknown.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/icon-yes.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/inline-delete.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/search.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/selector-icons.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/sorting-icons.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/tooltag-add.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/img/tooltag-arrowright.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/SelectBox.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/SelectFilter2.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/actions.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/actions.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/admin/DateTimeShortcuts.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/admin/RelatedObjectLookups.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/calendar.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/cancel.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/change_form.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/collapse.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/collapse.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/core.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/inlines.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/inlines.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/jquery.init.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/popup_response.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/prepopulate.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/prepopulate.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/prepopulate_init.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/related-widget-wrapper.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/timeparse.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/urlify.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/vendor/jquery/LICENSE-JQUERY.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/vendor/jquery/jquery.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/vendor/jquery/jquery.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/vendor/xregexp/LICENSE-XREGEXP.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/vendor/xregexp/xregexp.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/admin/js/vendor/xregexp/xregexp.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/avatars/Screen_Shot_2017-12-18_at_10.53.10_AM.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/avatars/Screen_Shot_2017-12-18_at_10.53.10_AM_TjKLiQS.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/avatars/Screen_Shot_2017-12-18_at_10.53.10_AM_zG7j1af.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/css/climpek.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/css/custom.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_base.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_breadcrumbs.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_changeform.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_changelist.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_content.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_dashboard.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_delete-confirmation.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_forms.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_globals.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_header.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_helpers.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_login.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_messages.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_modules.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_object-tools.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_relatedpopup.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_sidebar.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_tables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/_variables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/icons/_variables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/icons/fonts/jet-icons.eot" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/icons/fonts/jet-icons.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/icons/fonts/jet-icons.ttf" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/icons/fonts/jet-icons.woff" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/icons/style.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/_jquery-ui.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-bg_flat_75_ffffff_40x100.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-bg_glass_55_fbf9ee_1x400.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-bg_glass_65_ffffff_1x400.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-bg_glass_75_dadada_1x400.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-bg_glass_75_e6e6e6_1x400.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-bg_glass_95_fef1ec_1x400.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-bg_highlight-soft_75_cccccc_1x100.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-icons_222222_256x240.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-icons_2e83ff_256x240.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-icons_454545_256x240.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-icons_888888_256x240.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/jquery-ui/images/ui-icons_cd0a0a_256x240.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/select2/_layout.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/select2/_multiple.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/select2/_single.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/_variables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/base.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/base.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/base.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/jquery-ui.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/jquery-ui.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/jquery-ui.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/select2.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/select2.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/default/select2.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/_variables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/base.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/base.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/base.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/jquery-ui.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/jquery-ui.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/jquery-ui.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/select2.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/select2.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/green/select2.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/_variables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/base.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/base.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/base.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/jquery-ui.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/jquery-ui.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/jquery-ui.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/select2.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/select2.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-blue/select2.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/_variables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/base.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/base.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/base.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/jquery-ui.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/jquery-ui.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/jquery-ui.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/select2.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/select2.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-gray/select2.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/_variables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/base.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/base.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/base.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/jquery-ui.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/jquery-ui.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/jquery-ui.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/select2.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/select2.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-green/select2.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/_variables.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/base.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/base.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/base.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/jquery-ui.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/jquery-ui.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/jquery-ui.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/select2.theme.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/select2.theme.css.map" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/themes/light-violet/select2.theme.scss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/css/vendor.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/build/bundle.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-cs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-de.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-es.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-fr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-hr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-hu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-it.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-ja.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-mk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-nl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-pl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-pt-BR.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-ru.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-sl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-sv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui-timepicker/jquery.ui.timepicker-tr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-af.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ar-DZ.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ar.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-az.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-be.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-bg.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-bs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ca.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-cs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-cy-GB.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-da.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-de.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-el.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-en-AU.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-en-GB.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-en-NZ.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-eo.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-es.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-et.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-eu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-fa.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-fi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-fo.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-fr-CA.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-fr-CH.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-fr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-gl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-he.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-hi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-hr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-hu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-hy.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-id.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-is.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-it-CH.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-it.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ja.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ka.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-kk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-km.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ko.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ky.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-lb.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-lt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-lv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-mk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ml.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ms.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-nb.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-nl-BE.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-nl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-nn.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-no.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-pl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-pt-BR.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-pt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-rm.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ro.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ru.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-sk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-sl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-sq.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-sr-SR.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-sr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-sv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-ta.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-th.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-tj.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-tr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-uk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-vi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-zh-CN.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-zh-HK.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/jquery-ui/datepicker-zh-TW.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/az.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/bg.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/ca.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/cs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/da.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/de.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/en.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/es.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/et.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/eu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/fa.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/fi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/fr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/gl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/he.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/hi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/hr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/hu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/id.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/is.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/it.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/ko.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/lt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/lv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/mk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/nb.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/nl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/pl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/pt-BR.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/pt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/ro.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/ru.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/sk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/sr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/sv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/th.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/tr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/uk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/vi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/zh-CN.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/i18n/select2/zh-TW.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/changeform-tabs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/changeform.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/changelist.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/checkboxes.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/compact-inline.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/dashboard.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/date-time-widgets.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/filters.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/inlines.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/related-popups.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/scroll-to-bottom-detector.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/selects.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/siblings.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/sidebar/application-pinning.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/sidebar/bookmarks.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/sidebar/main.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/sidebar/popup.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/themes.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/tooltips.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/features/touchmove-non-scrollable.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/actions.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/branding.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/breadcrumbs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/changeform-tabs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/delete-confirmation.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/icons.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/object-tools.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/paginator.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/related-widget-wrapper.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/stacked-inline.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/tabular-inline.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/toolbar.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/layout-updaters/user-tools.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/main.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/utils/jquery-icontains.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/utils/jquery-slidefade.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/utils/translate.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/jet/js/src/utils/window-storage.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/js/custom_print.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/range_filter/css/style.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/app.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/angular-animate/angular-animate.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/angular-aria/angular-aria.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/angular-material/angular-material.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/angular-material/angular-material.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/angular-route/angular-route.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/angular-ui-tree/dist/angular-ui-tree.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/angular/angular.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/hammerjs/hammer.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/handsontable/dist/handsontable.full.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/handsontable/dist/handsontable.full.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/lodash/dist/lodash.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/moment/moment.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/nghandsontable/dist/ngHandsontable.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/pikaday-angular/pikaday-angular.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/pikaday/css/pikaday.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/pikaday/pikaday.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/bower_components/restangular/dist/restangular.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/controllers.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/css/angular_report.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/add.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/arrow.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/arrow_down.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/copy.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/delete.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/download.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/edit.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/edit.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/list.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/new/copy.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/new/delete.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/new/download.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/plus.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/reorder.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/star.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/star.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/img/unstar.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/js/jquery-2.2.3.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/js/report_form.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/js/report_list.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/add.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/display_field.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/fields.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/filter_renderer.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/filters.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/home.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/node_renderer.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/options.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/report_select.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/report_builder/partials/show_report.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/requirements.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bonds/settings/public/static/seal.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/powers/migrations/0014_auto_20180806_1329.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/powers/migrations/0015_auto_20180806_1338.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/powers/migrations/0016_auto_20180806_1349.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/powers/admin.py" afterPath="$PROJECT_DIR$/powers/admin.py" />
+      <change beforePath="$PROJECT_DIR$/powers/models.py" afterPath="$PROJECT_DIR$/powers/models.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,37 +415,53 @@
     <favorites_list name="bonds" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings-dev.py" pinned="false" current-in-tab="true">
+    <leaf>
+      <file leaf-file-name="settings-dev.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bonds/settings/settings-dev.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="2" selection-end-line="120" selection-end-column="3" />
+            <state relative-caret-position="176">
+              <caret line="150" column="24" lean-forward="true" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bonds/urls.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/powers/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="30" column="14" lean-forward="false" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
-              <folding>
-                <element signature="e#639#680#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="318">
+              <caret line="135" column="30" lean-forward="true" selection-start-line="135" selection-start-column="30" selection-end-line="135" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/powers/models.py">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/report_builder/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2464">
-              <caret line="125" column="29" lean-forward="false" selection-start-line="125" selection-start-column="29" selection-end-line="125" selection-end-column="29" />
-              <folding>
-                <element signature="e#24#63#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="283">
+              <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filter_renderer.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/report_builder/partials/filter_renderer.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="10" column="12" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="deploy.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deploy.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -54,12 +470,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>S</find>
-      <find>details-list</find>
-      <find>show thw watermark</find>
-      <find>item-name</find>
-      <find>Powers</find>
-      <find>AgentForm</find>
       <find>class Powers</find>
       <find>class USer</find>
       <find>shortcu</find>
@@ -80,10 +490,16 @@
       <find>test_agent</find>
       <find>time</find>
       <find>powers</find>
-      <find>report</find>
       <find>has_been_printed</find>
       <find>success</find>
       <find>message_user</find>
+      <find>transfer</find>
+      <find>bond</find>
+      <find>AgentForm</find>
+      <find>date</find>
+      <find>issuing_date</find>
+      <find>title</find>
+      <find>report</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -94,7 +510,6 @@
       <list>
         <option value="$PROJECT_DIR$/cors-json-file.json" />
         <option value="$PROJECT_DIR$/rest_db.sh" />
-        <option value="$PROJECT_DIR$/templates/report_builder/base.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/powers/management/commands/test_data.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -117,7 +532,6 @@
         <option value="$PROJECT_DIR$/templates/admin/login.html" />
         <option value="$PROJECT_DIR$/static/js/custom_print.js" />
         <option value="$PROJECT_DIR$/manage.py" />
-        <option value="$PROJECT_DIR$/powers/models.py" />
         <option value="$PROJECT_DIR$/templates/print/bond_print.html" />
         <option value="$PROJECT_DIR$/static/css/custom.css" />
         <option value="$PROJECT_DIR$/templates/admin/account/powers_action_bulk.html" />
@@ -127,15 +541,18 @@
         <option value="$PROJECT_DIR$/powers/utils.py" />
         <option value="$PROJECT_DIR$/powers/tests/selenium_tests.py" />
         <option value="$PROJECT_DIR$/powers/admin.py" />
+        <option value="$PROJECT_DIR$/public/report_builder/partials/filters.html" />
+        <option value="$PROJECT_DIR$/templates/report_builder/base.html" />
+        <option value="$PROJECT_DIR$/public/report_builder/partials/filter_renderer.html" />
         <option value="$PROJECT_DIR$/bonds/settings/settings-dev.py" />
+        <option value="$PROJECT_DIR$/powers/models.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-1680" />
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
-    <option name="width" value="1428" />
-    <option name="height" value="963" />
+    <option name="width" value="1680" />
+    <option name="height" value="959" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -155,6 +572,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -162,12 +581,15 @@
               <item name="bonds" type="b2602c69:ProjectViewProjectNode" />
               <item name="bonds" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bonds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bonds" type="462c0819:PsiDirectoryNode" />
+              <item name="powers" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -256,18 +678,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1680" y="23" width="1428" height="963" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="959" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16773276" sideWeight="0.4951857" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16757083" sideWeight="0.4951857" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35023043" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34953704" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39930555" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14647378" sideWeight="0.5048143" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -314,57 +736,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/envname/lib/python3.6/site-packages/django/db/models/fields/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="1168" column="6" lean-forward="false" selection-start-line="1168" selection-start-column="6" selection-end-line="1168" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/envname/lib/python3.6/site-packages/material/frontend/views/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bonds/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rest_db.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/powers/tests/webdriver.py" />
-    <entry file="file://$PROJECT_DIR$/powers/tests/test_webdriver.py" />
-    <entry file="file://$PROJECT_DIR$/selenium_tests/tests/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/selenium_tests/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/selenium_tests/webdriver.py" />
     <entry file="file://$PROJECT_DIR$/selenium_tests/test.py" />
     <entry file="file://$PROJECT_DIR$/selenium_tests/tests/auth.py" />
     <entry file="file://$PROJECT_DIR$/powers/tests/utils.py" />
     <entry file="file://$PROJECT_DIR$/templates/admin/base.html" />
-    <entry file="file://$PROJECT_DIR$/templates/report_builder/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="10" lean-forward="true" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bonds/settings.py" />
     <entry file="file://$PROJECT_DIR$/powers/management/commands/test_data.py" />
     <entry file="file://$PROJECT_DIR$/static/js/forceHttps.js" />
@@ -431,13 +806,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/powers/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/print/bond_print.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -449,16 +817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
           <caret line="129" column="19" lean-forward="false" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bonds/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="30" column="14" lean-forward="false" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
-          <folding>
-            <element signature="e#639#680#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -480,20 +838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="127">
           <caret line="9" column="40" lean-forward="false" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/powers/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="7" column="28" lean-forward="false" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deploy.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -531,44 +875,167 @@
     <entry file="file://$PROJECT_DIR$/people/views.py" />
     <entry file="file://$PROJECT_DIR$/people/models.py" />
     <entry file="file://$PROJECT_DIR$/powers/migrations/0014_auto_20180801_1239.py" />
-    <entry file="file://$PROJECT_DIR$/powers/models.py">
+    <entry file="file://$PROJECT_DIR$/envname/lib/python3.6/site-packages/django/core/mail/message.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2464">
-          <caret line="125" column="29" lean-forward="false" selection-start-line="125" selection-start-column="29" selection-end-line="125" selection-end-column="29" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="154">
+          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/powers/admin.py">
+    <entry file="file://$PROJECT_DIR$/powers/migrations/0012_auto_20180604_0751.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="127" column="13" lean-forward="true" selection-start-line="127" selection-start-column="13" selection-end-line="127" selection-end-column="13" />
+        <state relative-caret-position="242">
+          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/powers/migrations/0013_auto_20180604_0924.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/powers/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="27" column="29" lean-forward="false" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+        <state relative-caret-position="389">
+          <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#24#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/powers/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-431">
+          <caret line="43" column="66" lean-forward="false" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="66" />
+          <folding>
+            <element signature="e#24#63#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/powers/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/envname/lib/python3.6/site-packages/django/core/mail/message.py">
+    <entry file="file://$PROJECT_DIR$/powers/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/powers/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/powers/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/report_builder/partials/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1451">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bonds/public/static/range_filter/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
-          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/report_builder/partials/filters.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="8" lean-forward="true" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/report_builder/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/report_builder/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deploy.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/report_builder/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bonds/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-302">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#639#680#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/report_builder/partials/filter_renderer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="12" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bonds/settings/settings-dev.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="2" selection-end-line="120" selection-end-column="3" />
+        <state relative-caret-position="176">
+          <caret line="150" column="24" lean-forward="true" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/powers/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="135" column="30" lean-forward="true" selection-start-line="135" selection-start-column="30" selection-end-line="135" selection-end-column="30" />
           <folding />
         </state>
       </provider>
