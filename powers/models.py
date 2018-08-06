@@ -133,7 +133,7 @@ class Bond(models.Model):
         on_delete=models.CASCADE,
 
     )
-    issuing_date = models.DateField(
+    issuing_date = models.DateTimeField(
         null=True,
         blank=True,
         auto_now_add=True,
