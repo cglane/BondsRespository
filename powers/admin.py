@@ -131,7 +131,8 @@ class PowersAdmin(admin.ModelAdmin):
                 '__str__',
                 'end_date_field',
                 'date_of_transmission',
-                'powers_type'
+                'powers_type',
+                'powers_actions'
             )
             self.readonly_fields = ('date_of_transmission', 'surety_company',
                                     'agent', 'powers_type', 'end_date_field', )
@@ -244,13 +245,6 @@ class PowersAdmin(admin.ModelAdmin):
             {'title': u'Choose an Agent',
              'objects': queryset,
              'form': form})
-
-    def get_actions(self, request):
-        actions = super(PowersAdmin, self).get_actions(request)
-        if not request.user.is_superuser:
-            if 'transfer_group' in actions:
-                del actions['transfer_group']
-        return actions
 
     actions = [transfer_group, ]
 
