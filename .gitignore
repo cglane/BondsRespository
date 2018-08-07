@@ -8,3 +8,4 @@ bonds.pem
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+public

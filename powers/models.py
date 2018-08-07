@@ -133,6 +133,11 @@ class Bond(models.Model):
         on_delete=models.CASCADE,
 
     )
+    issuing_datetime = models.DateTimeField(
+        null=True,
+        blank=True,
+        auto_now_add=True,
+        help_text="This will automatically be set when bond is printed")
     issuing_date = models.DateField(
         null=True,
         blank=True,

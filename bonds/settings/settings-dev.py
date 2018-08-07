@@ -56,9 +56,9 @@ POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
 
 
 INSTALLED_APPS = [
-    'report_builder','jet', 'django.contrib.admin', 'django.contrib.auth',
+    'jet', 'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'powers','storages',
+    'django.contrib.messages', 'django.contrib.staticfiles', 'powers','storages','report_builder'
 ]
 
 MIDDLEWARE = [
@@ -108,7 +108,7 @@ DATABASES = {
 
     }
 }
-#
+
 # DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -159,32 +159,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-# STATIC_ROOT = location('public/static')
+STATIC_ROOT = location('public/static')
+STATIC_URL = '/static/'
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "..", "static"),
+# )
+#
+#
+# AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID_BONDS')
+# AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY_BONDS')
+#
+# AWS_STORAGE_BUCKET_NAME = 'static-bonds'
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# AWS_LOCATION = 'static'
+#
+# MEDIAFILES_LOCATION = 'media'
+# MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+#
+#
+# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+#
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#
+#
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "..", "static"),
-)
-
-
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID_BONDS')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY_BONDS')
-
-AWS_STORAGE_BUCKET_NAME = 'static-bonds'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
-
-MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-
-
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-
-# STATIC_URL = '/static/'

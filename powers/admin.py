@@ -41,7 +41,7 @@ class BondInlineAdmin(admin.TabularInline):
               'has_been_printed')
     readonly_fields = ('amount', 'premium', 'related_court', 'offences',
                        'warrant_number', 'state', 'city', 'county', 'agent',
-                       'powers', 'has_been_printed', 'issuing_date')
+                       'powers', 'has_been_printed', 'issuing_datetime')
     model = Bond
 
     def has_add_permission(self, request):
@@ -251,14 +251,14 @@ class PowersAdmin(admin.ModelAdmin):
 
 class BondAdmin(admin.ModelAdmin):
 
-    list_display = ('__str__', 'agent', 'issuing_date', 'voided','has_been_printed',
+    list_display = ('__str__', 'agent', 'issuing_datetime', 'voided','has_been_printed',
                     'bond_actions', 'make_voided')
     search_fields = ( 'powers__powers_type',  'agent__first_name')
 
     def get_queryset(self, request):
         qs = super(BondAdmin, self).get_queryset(request)
         if not request.user.is_superuser:
-            self.list_display = ('__str__', 'issuing_date',
+            self.list_display = ('__str__', 'issuing_datetime',
                                  'has_been_printed', 'bond_actions')
             return qs.filter(agent_id=request.user.id)
         return qs
