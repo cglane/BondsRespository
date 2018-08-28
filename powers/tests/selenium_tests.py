@@ -46,6 +46,7 @@ class TestAdmin(StaticLiveServerTestCase):
 		link_div = self.driver.find_element_by_class_name('app-powers')
 		link_headers = link_div.find_elements_by_tag_name('th')
 		link_names = [header.find_element_by_tag_name('a').text for header in link_headers]
+		print(link_names, 'names')
 		self.assertTrue('Bonds' in link_names)
 		self.assertTrue('Surety Companies' not in link_names)
 
