@@ -113,7 +113,6 @@ class Powers(models.Model):
 
     @property
     def powers_type_formatted(self):
-        print (type(self.powers_type), 'type')
         if self.powers_type:
             return int(float(self.powers_type) / 1000)
         return ''
