@@ -9,4 +9,3 @@ bonds.pem
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 public
-.idea/
