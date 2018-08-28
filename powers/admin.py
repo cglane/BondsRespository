@@ -98,6 +98,22 @@ class AgentAdmin(UserAdmin):
                     'fields': ('last_login', 'date_joined')
                 }),
             )
+        else:
+            self.fieldsets = (
+                ('Personal info', {
+                    'fields': ('first_name', 'last_name', 'email', 'password',
+                               'avatar')
+                }),
+                ('Important dates', {
+                    'fields': ('last_login', 'date_joined')
+                }),
+                ('Permissions', {
+                    'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+                }),
+                ('Important Dates', {
+                    'fields': ('last_login', 'date_joined')
+                }),
+            )
         return super(AgentAdmin, self).get_form(request, obj, **kwargs)
 
 
