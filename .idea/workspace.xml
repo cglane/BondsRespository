@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a538efa8-3649-4e2f-bd0e-eb554545239b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/bonds/settings/settings-prod.py" afterPath="$PROJECT_DIR$/bonds/settings/settings-prod.py" />
-      <change beforePath="$PROJECT_DIR$/powers/admin.py" afterPath="$PROJECT_DIR$/powers/admin.py" />
-    </list>
+    <list default="true" id="a538efa8-3649-4e2f-bd0e-eb554545239b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,8 +27,8 @@
       <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/powers/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="275" column="20" lean-forward="false" selection-start-line="275" selection-start-column="20" selection-end-line="275" selection-end-column="20" />
+            <state relative-caret-position="180">
+              <caret line="345" column="35" lean-forward="false" selection-start-line="345" selection-start-column="19" selection-end-line="345" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -83,7 +79,6 @@
       <find>test_user</find>
       <find>time</find>
       <find>powers</find>
-      <find>has_been_printed</find>
       <find>success</find>
       <find>message_user</find>
       <find>report</find>
@@ -102,6 +97,7 @@
       <find>AgentAdmin</find>
       <find>has_been</find>
       <find>Debug</find>
+      <find>has_been_printed</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -164,7 +160,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="98" />
-    <option name="y" value="94" />
+    <option name="y" value="39" />
     <option name="width" value="1680" />
     <option name="height" value="947" />
   </component>
@@ -317,8 +313,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="98" y="94" width="1680" height="947" extended-state="0" />
-    <editor active="true" />
+    <frame x="98" y="39" width="1680" height="947" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16696805" sideWeight="0.4951857" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -327,7 +322,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24061033" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24061033" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14647378" sideWeight="0.5048143" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -706,8 +701,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/powers/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="275" column="20" lean-forward="false" selection-start-line="275" selection-start-column="20" selection-end-line="275" selection-end-column="20" />
+        <state relative-caret-position="180">
+          <caret line="345" column="35" lean-forward="false" selection-start-line="345" selection-start-column="19" selection-end-line="345" selection-end-column="35" />
           <folding />
         </state>
       </provider>
