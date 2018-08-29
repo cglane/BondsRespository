@@ -269,7 +269,7 @@ class BondAdmin(admin.ModelAdmin):
 
     list_display = ('__str__', 'agent', 'issuing_datetime', 'voided','has_been_printed',
                     'bond_actions', 'make_voided')
-    search_fields = ( 'powers__powers_type',  'agent__first_name')
+    search_fields = ( 'powers__powers_type',  'agent__first_name', 'agent__last_name')
 
     def get_queryset(self, request):
         qs = super(BondAdmin, self).get_queryset(request)
@@ -299,12 +299,13 @@ class BondAdmin(admin.ModelAdmin):
 
             self.readonly_fields = ('has_been_printed', )
         else:
+
             current_power = Powers.objects.filter(id=powers_id)
             allowed_powers = Powers.objects.filter(
                 bond__isnull=True, end_date_field__gte=datetime.now()
             )
             form.base_fields['powers'].queryset = current_power | allowed_powers
-            self.readonly_fields = ('premium',)
+            self.readonly_fields = ('premium', )
         return form
 
 
