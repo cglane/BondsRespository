@@ -266,13 +266,19 @@ class PowersAdmin(admin.ModelAdmin):
 
 
 class BondAdmin(admin.ModelAdmin):
-
-    list_display = ('__str__', 'agent', 'issuing_datetime', 'voided','has_been_printed',
-                    'bond_actions', 'make_voided')
-    search_fields = ( 'powers__powers_type',  'agent__first_name', 'agent__last_name')
-
+    list_display = ('__str__', 'issuing_datetime',
+                         'has_been_printed', 'bond_actions')
+    search_fields = ( 'powers__powers_type',  'agent__first_name',
+                      'agent__last_name', 'defendant__last_name', 'powers__id')
     def get_queryset(self, request):
         qs = super(BondAdmin, self).get_queryset(request)
+        if request.user.username in getattr(settings, 'VOID_WHITELIST'):
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'has_been_printed',
+                            'bond_actions', 'make_voided')
+            print('hello charles')
+        else:
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'has_been_printed',
+                            'bond_actions')
         if not request.user.is_superuser:
             self.list_display = ('__str__', 'issuing_datetime',
                                  'has_been_printed', 'bond_actions')

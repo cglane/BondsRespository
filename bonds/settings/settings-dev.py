@@ -49,6 +49,12 @@ BOND_PRINT_CONTENT_THREE = 'and provided this Power-Of-Attorney is filed with th
 BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this <span class='long-date'>{1}</span>."
 # Application definition
 
+VOID_WHITELIST = ['charleslane23@gmail.com',
+                  'mfarmer@thefarmerlawfirm.com',
+                  'lowndes.sinkler@sinklerbonding.com',
+                  'hward@shelmoresurety.com'
+                  ]
+
 POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
                 ('25000.00', '25000.00'), ('50000.00', '50000.00'),
                 ('100000.00', '100000.00'), ('150000.00', '150000.00'),
