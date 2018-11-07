@@ -270,12 +270,20 @@ class BondAdmin(admin.ModelAdmin):
                          'has_been_printed', 'bond_actions')
     search_fields = ( 'powers__powers_type',  'agent__first_name',
                       'agent__last_name', 'defendant__last_name', 'powers__id')
+
+    def get_readonly_fields(self, request, obj=None):
+        readonly_fields = []
+        if request.user.username not in getattr(settings, 'VOID_WHITELIST'):
+            readonly_fields.append('voided')
+        if not request.user.is_superuser:
+            readonly_fields.append('has_been_printed')
+        return readonly_fields
+
     def get_queryset(self, request):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'has_been_printed',
                             'bond_actions', 'make_voided')
-            print('hello charles')
         else:
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'has_been_printed',
                             'bond_actions')
