@@ -9,7 +9,7 @@ class TestAdmin(StaticLiveServerTestCase):
 
 	def setUp(self):
 		self.super_user =   {
-			'username': 'test_admin',
+			'username': 'admin',
 			'password': '1Testing!',
 			'first_name': 'Charles',
 			'last_name': 'Lane',
