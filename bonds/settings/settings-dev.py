@@ -107,24 +107,29 @@ WSGI_APPLICATION = 'bonds.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
+if os.environ.get('ENVIRONMENT_NAME') == 'development':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'ebdb',
+            'USER': 'postgres',
+            'PASSWORD': os.environ.get('BOND_DEV_PASSWORD'),
+            'HOST': os.environ.get('BOND_DEV_HOST'),
+            'PORT': '5432',
+        }
+    }
 
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'ebdb',
-#        'USER': 'postgres',
-#        'PASSWORD': os.environ.get('BOND_PASSWORD'),
-#        'HOST': os.environ.get('BOND_HOST'),
-#        'PORT': '5432',
-#    }
-# }
 
 
 # Password validation
