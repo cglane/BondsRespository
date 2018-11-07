@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
+import sys
 def location(x):
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), x)
 
@@ -130,7 +130,15 @@ else:
         }
     }
 
+if 'test' in sys.argv:
+    print('sys')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
