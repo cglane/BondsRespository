@@ -49,6 +49,12 @@ BOND_PRINT_CONTENT_THREE = 'and provided this Power-Of-Attorney is filed with th
 BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this <span class='long-date'>{1}</span>."
 # Application definition
 
+VOID_WHITELIST = ['charleslane23@gmail.com',
+                  'mfarmer@thefarmerlawfirm.com',
+                  'lowndes.sinkler@sinklerbonding.com',
+                  'hward@shelmoresurety.com'
+                  ]
+
 POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
                 ('25000.00', '25000.00'), ('50000.00', '50000.00'),
                 ('100000.00', '100000.00'), ('150000.00', '150000.00'),
@@ -101,24 +107,29 @@ WSGI_APPLICATION = 'bonds.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
+if os.environ.get('ENVIRONMENT_NAME') == 'development':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'ebdb',
+            'USER': 'postgres',
+            'PASSWORD': os.environ.get('BOND_DEV_PASSWORD'),
+            'HOST': os.environ.get('BOND_DEV_HOST'),
+            'PORT': '5432',
+        }
+    }
 
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'ebdb',
-#        'USER': 'postgres',
-#        'PASSWORD': os.environ.get('BOND_PASSWORD'),
-#        'HOST': os.environ.get('BOND_HOST'),
-#        'PORT': '5432',
-#    }
-# }
 
 
 # Password validation
