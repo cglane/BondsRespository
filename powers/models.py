@@ -45,9 +45,7 @@ class SuretyCompany(models.Model):
 
     def print_content_four(self):
         datetime_object = datetime.now()
-        local_dt = datetime_object.replace(
-            tzinfo=pytz.utc).astimezone(local_tz)
-        todays_date = local_tz.normalize(local_dt).strftime(
+        todays_date = datetime_object.strftime(
             "%dth day of %B A.D. %Y")
         content = getattr(settings, 'BOND_PRINT_CONTENT_FOUR')
         return content.format(self.title, todays_date)
