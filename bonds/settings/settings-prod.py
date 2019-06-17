@@ -61,7 +61,8 @@ POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
 VOID_WHITELIST = ['charleslane23@gmail.com',
                   'mfarmer@thefarmerlawfirm.com',
                   'lowndes.sinkler@sinklerbonding.com',
-                  'hward@shelmoresurety.com'
+                  'hward@shelmoresurety.com',
+                  'lshirley@shelmoresurety.com'
                   ]
 
 INSTALLED_APPS = [
