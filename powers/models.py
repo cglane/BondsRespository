@@ -121,6 +121,7 @@ class Bond(models.Model):
     defendant = models.ForeignKey(Defendant, on_delete=models.CASCADE)
     has_been_printed = models.BooleanField(default=False)
     voided = models.NullBooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     agent = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

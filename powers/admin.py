@@ -17,7 +17,9 @@ from django.template.response import TemplateResponse
 from powers.utils import create_powers_batch_custom
 import pytz
 from django.shortcuts import render
-
+from django_admin_listfilter_dropdown.filters import (
+    DropdownFilter, ChoiceDropdownFilter, RelatedDropdownFilter
+)
 from powers.models import (
     SuretyCompany,
     Defendant,
@@ -270,7 +272,10 @@ class BondAdmin(admin.ModelAdmin):
                          'has_been_printed', 'bond_actions')
     search_fields = ( 'powers__powers_type',  'agent__first_name',
                       'agent__last_name', 'defendant__last_name', 'powers__id')
-
+    list_filter = (
+        ('is_active', DropdownFilter),
+        ('has_been_printed', DropdownFilter),
+    )
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = []
         if request.user.username not in getattr(settings, 'VOID_WHITELIST'):
@@ -282,14 +287,14 @@ class BondAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
-            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'has_been_printed',
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'is_active','has_been_printed',
                             'bond_actions', 'make_voided')
         else:
-            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'has_been_printed',
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'is_active', 'has_been_printed',
                             'bond_actions')
         if not request.user.is_superuser:
             self.list_display = ('__str__', 'issuing_datetime',
-                                 'has_been_printed', 'bond_actions')
+                                 'has_been_printed', 'is_active','bond_actions')
             return qs.filter(agent_id=request.user.id)
         return qs
 

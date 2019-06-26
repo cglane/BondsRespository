@@ -10,3 +10,4 @@ bonds.pem
 !.elasticbeanstalk/*.global.yml
 public
 .idea
+virt
