@@ -108,7 +108,6 @@ WSGI_APPLICATION = 'bonds.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-print(os.environ.get('BOND_DEV_HOST'), 'dev db')
 if os.environ.get('ENVIRONMENT_NAME') == 'development':
     DATABASES = {
         'default': {
