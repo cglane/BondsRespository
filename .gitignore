@@ -11,3 +11,4 @@ bonds.pem
 public
 .idea
 virt
+*.pyc
