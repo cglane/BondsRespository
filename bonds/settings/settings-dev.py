@@ -64,7 +64,9 @@ POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
 INSTALLED_APPS = [
     'jet', 'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'powers','storages','report_builder'
+    'django.contrib.messages', 'django.contrib.staticfiles', 'powers',
+    'storages','report_builder',    'django_admin_listfilter_dropdown',
+
 ]
 
 MIDDLEWARE = [
@@ -105,7 +107,6 @@ WSGI_APPLICATION = 'bonds.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 
 if os.environ.get('ENVIRONMENT_NAME') == 'development':
     DATABASES = {

@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'report_builder','jet', 'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
     'django.contrib.messages', 'django.contrib.staticfiles', 'powers','storages',
+    'django_admin_listfilter_dropdown'
 ]
 
 MIDDLEWARE = [
