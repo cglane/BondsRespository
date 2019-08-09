@@ -126,7 +126,6 @@ class PowersAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
-
     def get_queryset(self, request):
         """
         Only want powers that have end date in future to appear
@@ -154,6 +153,7 @@ class PowersAdmin(admin.ModelAdmin):
             )
             self.readonly_fields = ('date_of_transmission', 'surety_company',
                                     'agent', 'powers_type', 'end_date_field', )
+
         return qs.filter(agent_id=request.user.id, end_date_field__gte=datetime.now())
 
     def currently_used(self, instance):
@@ -203,9 +203,6 @@ class PowersAdmin(admin.ModelAdmin):
         return render(request, 'admin/account/create_batch_form.html',
                       {'title': u'Create a Batch',
                        'form': form})
-        # create_powers_batch()
-        # url = reverse('admin:powers_powers_changelist', )
-        # return HttpResponseRedirect(url)
 
     def powers_actions(self, obj):
         return format_html('<a class="button" href="{}">Transfer</a>',
@@ -243,6 +240,7 @@ class PowersAdmin(admin.ModelAdmin):
             'admin/account/powers_action.html',
             context,
         )
+
     def transfer_group(self, request, queryset):
         if 'do_action' in request.POST:
             form = AgentForm(request.POST)
@@ -265,6 +263,15 @@ class PowersAdmin(admin.ModelAdmin):
              'form': form})
 
     actions = [transfer_group, ]
+
+    # Pass allow to template
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        allow_bulk_create = False
+        if request.user.username in getattr(settings, 'VOID_WHITELIST'):
+            allow_bulk_create = True
+        extra_context['allow_bulk_create'] = allow_bulk_create
+        return super(PowersAdmin, self).changelist_view(request, extra_context=extra_context)
 
 
 class BondAdmin(admin.ModelAdmin):
