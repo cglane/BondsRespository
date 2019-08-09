@@ -62,7 +62,7 @@ VOID_WHITELIST = ['charleslane23@gmail.com',
                   'mfarmer@thefarmerlawfirm.com',
                   'lowndes.sinkler@sinklerbonding.com',
                   'hward@shelmoresurety.com',
-                  'lshirley@shelmoresurety.com'
+                  'lshirley@shelmoresurety.com',
                   ]
 
 INSTALLED_APPS = [
