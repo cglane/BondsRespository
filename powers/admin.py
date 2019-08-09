@@ -153,7 +153,6 @@ class PowersAdmin(admin.ModelAdmin):
             )
             self.readonly_fields = ('date_of_transmission', 'surety_company',
                                     'agent', 'powers_type', 'end_date_field', )
-        return qs.filter(end_date_field__gte=datetime.now())
 
         return qs.filter(agent_id=request.user.id, end_date_field__gte=datetime.now())
 
