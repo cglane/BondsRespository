@@ -205,9 +205,6 @@ class PowersAdmin(admin.ModelAdmin):
         return render(request, 'admin/account/create_batch_form.html',
                       {'title': u'Create a Batch',
                        'form': form})
-        # create_powers_batch()
-        # url = reverse('admin:powers_powers_changelist', )
-        # return HttpResponseRedirect(url)
 
     def powers_actions(self, obj):
         return format_html('<a class="button" href="{}">Transfer</a>',
@@ -267,6 +264,13 @@ class PowersAdmin(admin.ModelAdmin):
              'form': form})
 
     actions = [transfer_group, ]
+
+
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['some_var'] = 'This is what I want to show'
+        return super(PowersAdmin, self).changelist_view(request, extra_context=extra_context)
 
 
 class BondAdmin(admin.ModelAdmin):

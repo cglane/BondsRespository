@@ -2,6 +2,10 @@
 {% block object-tools-items %}
 {% if request.user.is_superuser %}
 <li>
+    {{request.user.id}}id
+    {% if request.user.email in VOID_WHITELIST %}
+    <h1>In There</h1>
+    {% endif %}
     <a href="/admin/powers/powers/create_batch" class="addlink">
         Create Batch
     </a>

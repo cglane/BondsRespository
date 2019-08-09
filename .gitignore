@@ -12,3 +12,6 @@ public
 .idea
 virt
 *.pyc
+bin
+include
+lib
