@@ -149,7 +149,7 @@ class Bond(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=20, )
     warrant_number = models.TextField()
-    offences = models.TextField()
+    offenses = models.TextField()
 
     def __str__(self):
         return str(self.powers) + ' ' + self.defendant.last_name
@@ -187,7 +187,7 @@ class Bond(models.Model):
             'value': self.city + '/' + self.state
         }, {
             'name': 'Charge',
-            'value': self.offences
+            'value': self.offenses
         }, {
             'name': 'Executing Agent',
             'value': self.agent
