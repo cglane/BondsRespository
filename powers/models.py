@@ -44,9 +44,11 @@ class SuretyCompany(models.Model):
         return content
 
     def print_content_four(self):
+        datetime_object = datetime.now()
+        todays_date = datetime_object.strftime(
+            "%dth day of %B A.D. %Y")
         content = getattr(settings, 'BOND_PRINT_CONTENT_FOUR')
-        filler = "____________________ day of ____________________"
-        return content.format(self.title, filler)
+        return content.format(self.title, todays_date)
 
 
 class User(AbstractUser):
@@ -170,7 +172,7 @@ class Bond(models.Model):
             'value': '${:,.2f}'.format(self.bond_fee)
         },{
             'name': 'Defendant',
-            'value': '___________________'
+            'value': self.defendant
         }, {
             'name': 'Court',
             'value': self.related_court
@@ -188,5 +190,5 @@ class Bond(models.Model):
             'value': self.offences
         }, {
             'name': 'Executing Agent',
-            'value': '___________________'
+            'value': self.agent
         }]
