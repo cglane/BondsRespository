@@ -55,7 +55,7 @@ class TestAdmin(StaticLiveServerTestCase):
 		##Signin
 		self.driver.get("http://localhost:8000/admin/login/?next=/admin/")
 
-		self.driver.find_element_by_id('id_username').send_keys(self.super_user['username'])
+		self.driver.find_element_by_id('id_username').send_keys(self.super_user['email'])
 		self.driver.find_element_by_id('id_password').send_keys(self.super_user['password'])
 		self.driver.find_element_by_xpath('//input[@value="Log in"]').click()
 
@@ -121,7 +121,7 @@ class TestAdmin(StaticLiveServerTestCase):
 		self.driver.find_element_by_id('id_city').send_keys('charleston')
 		self.driver.find_element_by_id('id_state').send_keys('sc')
 		self.driver.find_element_by_id('id_warrant_number').send_keys('12222')
-		self.driver.find_element_by_id('id_offences').send_keys('Rape and Murder')
+		self.driver.find_element_by_id('id_offenses').send_keys('Rape and Murder')
 		self.driver.find_element_by_xpath('//input[@value="Save"]').click()
 		
 		self.assertEqual(self.driver.current_url, 'http://localhost:8000/admin/powers/bond/')

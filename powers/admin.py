@@ -38,10 +38,10 @@ class SuretyAdmin(admin.ModelAdmin):
 
 
 class BondInlineAdmin(admin.TabularInline):
-    fields = ('amount', 'premium', 'related_court', 'offences',
+    fields = ('amount', 'premium', 'related_court', 'offenses',
               'warrant_number', 'state', 'city', 'county', 'agent', 'powers',
               'has_been_printed')
-    readonly_fields = ('amount', 'premium', 'related_court', 'offences',
+    readonly_fields = ('amount', 'premium', 'related_court', 'offenses',
                        'warrant_number', 'state', 'city', 'county', 'agent',
                        'powers', 'has_been_printed', 'issuing_datetime')
     model = Bond

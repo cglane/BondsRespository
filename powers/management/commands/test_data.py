@@ -47,7 +47,7 @@ class Command(BaseCommand):
         'county': 'Charleston',
         'city': 'Charleston',
         'warrant_number': '12345',
-        'offences': 'murder and rape',
+        'offenses': 'murder and rape',
         'amount': 3000,
         'premium': 100
     }
