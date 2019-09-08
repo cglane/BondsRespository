@@ -61,6 +61,13 @@ POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
                 ('100000.00', '100000.00'), ('150000.00', '150000.00'),
                 ('250000.00', '250000.00'), ('500000.00', '500000.00'))
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ['BONDS_EMAIL_ADDRESS']
+EMAIL_HOST_PASSWORD = os.environ['BONDS_EMAIL_PASSWORD']
 
 INSTALLED_APPS = [
     'jet', 'django.contrib.admin', 'django.contrib.auth',

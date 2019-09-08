@@ -19,28 +19,30 @@ class TransferPowersForm(forms.Form):
     agent = forms.ModelChoiceField(
         queryset=User.objects.filter(is_active=True))
 
-    def __init__(self, agent=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         # For testing
-        print(agent, 'agent')
-        super(TransferPowersForm, self).__init__(*args, **kwargs)
-        if agent:
-            self.cleaned_data = {'agent': agent.id}
 
+        agent_test = kwargs.pop('agent_test', None)
+
+        super(TransferPowersForm, self).__init__(*args, **kwargs)
+
+        if agent_test:
+            self.cleaned_data = {'agent': agent_test}
 
     def save(self, powers):
         try:
             self.form_action(powers)
             # Clear out low powers message
-            agent_id = self.cleaned_data['agent']
-            agent = User.objects.get(id=agent_id)
+            agent = self.cleaned_data['agent']
+            agent = User.objects.get(id=agent.id)
             agent.powers_low_message = ''
             agent.save()
-        except:
+        except Exception as e:
             raise forms.ValidationError("Failed to save form.")
 
     def form_action(self, powers):
         power = Powers.objects.get(id=powers.id)
-        power.agent_id = self.cleaned_data['agent']
+        power.agent = self.cleaned_data['agent']
 
         future_date = datetime.datetime.now() + datetime.timedelta(getattr(settings, 'POWERS_EXPIRATION_TRANSFER'))
         power.end_date_field = future_date

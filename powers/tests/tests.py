@@ -85,7 +85,7 @@ class TestModels(TestCase):
         type = '5000.00'
 
         agent = User.objects.get(first_name='Juan')
-        transfer_form = TransferPowersForm(agent=agent)
+        transfer_form = TransferPowersForm(agent_test=agent)
         create_powers_batch_custom(1, type)
         powers_of_type = Powers.objects.all().filter(powers_type=type, bond__isnull=True, agent__isnull=True)
         transfer_form.save(powers=powers_of_type[0])
@@ -106,11 +106,11 @@ class TestModels(TestCase):
         powers_of_type = Powers.objects.all().filter(powers_type=type, bond__isnull=True, agent__isnull=True)
 
         # Assign to user
-        transfer_form = TransferPowersForm(agent=agent)
+        transfer_form = TransferPowersForm(agent_test=agent)
         transfer_form.save(powers=powers_of_type[0])
 
         # Assign to user
-        transfer_form = TransferPowersForm(agent=agent)
+        transfer_form = TransferPowersForm(agent_test=agent)
         transfer_form.save(powers=powers_of_type[1])
 
         agent = User.objects.get(first_name='Juan')

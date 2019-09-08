@@ -219,8 +219,8 @@ class PowersAdmin(admin.ModelAdmin):
             form = TransferPowersForm(request.POST)
             if form.is_valid():
                 try:
-                    form.save(powers, request.user)
-                except:
+                    form.save(powers)
+                except Exception as e:
                     # If save() raised, the form will a have a non
                     # field error containing an informative message.
                     pass
