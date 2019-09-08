@@ -2,12 +2,35 @@
 from __future__ import unicode_literals
 from django.test import TestCase
 from powers.models import SuretyCompany, User, Defendant, Bond, Powers
-from powers.utils import create_powers_batch
+from powers.utils import create_powers_batch, create_powers_batch_custom
 from django.contrib.auth.models import (Group, Permission)
-
+from powers.forms import TransferPowersForm
 
 # Create your tests here.
 from datetime import datetime
+
+def create_bond(agent):
+    bond_dict = {
+        'amount': 300.00,
+        'premium': 200.00,
+        'related_court': 'related court',
+        'county': 'Charleston',
+        'city': 'Charleston',
+        'state': 'SC',
+        'warrant_number': '234567',
+        'offenses': 'crimes and punishment',
+        'bond_fee': 10
+    }
+
+    power = Powers.objects.all().filter(agent__id=agent.id, bond__isnull=True).all()[0]
+    defendant = Defendant.objects.all()[0]
+    bond_record = Bond(**bond_dict)
+    bond_record.defendant = defendant
+    bond_record.agent = agent
+    bond_record.powers = power
+    bond_record.save()
+    return bond_record
+
 
 class TestModels(TestCase):
     super_user = {
@@ -58,45 +81,42 @@ class TestModels(TestCase):
         create_powers_batch()
 
 
-
-    def test_powers(self):
-        powers = Powers.objects.all()
-        powers_types = [float(x.powers_type) for x in powers]
-        self.assertEquals(len(powers), 8)
-        self.assertEquals(max(powers_types), 500000.00)
-        self.assertEquals(min(powers_types), 5000.00)
-
-        agent = User.objects.get(first_name="Juan")
-        power = Powers.objects.filter(powers_type='5000.00')[0]
-        power.agent = agent
-        power.end_date_field = datetime.today()
-        power.start_date_transmission = datetime.now()
-        power.save()
-
-        self.assertEquals(power.agent.first_name, 'Juan')
-
     def test_create_bond(self):
+        type = '5000.00'
 
         agent = User.objects.get(first_name='Juan')
-        power = Powers.objects.all()[0]
-        defendant = Defendant.objects.all()[0]
-        bond_dict = {
-            'amount': 300.00,
-            'premium': 200.00,
-            'related_court': 'related court',
-            'county': 'Charleston',
-            'city': 'Charleston',
-            'state': 'SC',
-            'warrant_number': '234567',
-            'offenses': 'crimes and punishment'
-        }
-        bond_record = Bond(**bond_dict)
-        bond_record.defendant = defendant
-        bond_record.agent = agent
-        bond_record.powers = power
-        bond_record.save()
+        transfer_form = TransferPowersForm(agent=agent)
+        create_powers_batch_custom(1, type)
+        powers_of_type = Powers.objects.all().filter(powers_type=type, bond__isnull=True, agent__isnull=True)
+        transfer_form.save(powers=powers_of_type[0])
+        # Create Bond
+        bond_record = create_bond(agent)
 
         self.assertEquals(bond_record.has_been_printed, False)
-        self.assertEquals(bond_record.powers.powers_type, '5000.00')
+        self.assertEquals(bond_record.powers.powers_type, type)
 
+        agent = User.objects.get(first_name='Juan')
+        assert agent.powers_low_message
+        assert '5000' in agent.powers_low_message
 
+    def test_powers_low(self):
+        type = '25000.00'
+        agent = User.objects.get(first_name='Juan')
+        create_powers_batch_custom(2, type)
+        powers_of_type = Powers.objects.all().filter(powers_type=type, bond__isnull=True, agent__isnull=True)
+
+        # Assign to user
+        transfer_form = TransferPowersForm(agent=agent)
+        transfer_form.save(powers=powers_of_type[0])
+
+        # Assign to user
+        transfer_form = TransferPowersForm(agent=agent)
+        transfer_form.save(powers=powers_of_type[1])
+
+        agent = User.objects.get(first_name='Juan')
+        assert not agent.powers_low_message
+
+        # Create bond
+        bond_record = create_bond(agent)
+        agent = User.objects.get(first_name='Juan')
+        assert not agent.powers_low_message

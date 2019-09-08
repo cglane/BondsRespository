@@ -2,7 +2,6 @@ from powers.models import Powers, SuretyCompany
 import datetime
 from django.conf import settings
 
-
 def create_powers_batch():
     surety = SuretyCompany.objects.all()
     future_date = datetime.datetime.now() + datetime.timedelta(getattr(settings, 'POWERS_EXPIRATION'))

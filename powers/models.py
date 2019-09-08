@@ -7,6 +7,7 @@ from django.db import models
 # -*- coding: utf-8 -*-
 # from django.contrib.auth.models import User
 import uuid
+from powers.handlers import handle_low_powers
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
@@ -56,6 +57,7 @@ class User(AbstractUser):
         upload_to='static/avatars', blank=True, null=True)
     contract_rate = models.FloatField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    powers_low_message = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name = _('agent')
@@ -161,6 +163,16 @@ class Bond(models.Model):
                 "Amount of {0} can not be greater than Powers of, {0}".format(
                     self.amount, self.powers.powers_type))
         self.premium = self.amount * getattr(settings, 'BOND_PREMIUM')
+        # Check to see if power type used last of type related to user when creating bond
+        if self._state.adding:
+            agent_power_no_bond = Powers.objects.all().filter(
+                agent__id=self.agent.id,
+                powers_type=self.powers.powers_type,
+                bond__isnull=True
+            )
+            if len(agent_power_no_bond) <= 1:
+                # Send email to administrator
+                handle_low_powers(self.agent, self.powers)
         super(Bond, self).save(*args, **kwargs)
 
     def details(self):

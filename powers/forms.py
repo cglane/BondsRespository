@@ -14,17 +14,31 @@ class PowersBatchForm(forms.Form):
 class AgentForm(forms.Form):
     agent = forms.ModelChoiceField(queryset=User.objects.all())
 
+
 class TransferPowersForm(forms.Form):
     agent = forms.ModelChoiceField(
         queryset=User.objects.filter(is_active=True))
 
-    def save(self, powers, user):
+    def __init__(self, agent=None, *args, **kwargs):
+        # For testing
+        print(agent, 'agent')
+        super(TransferPowersForm, self).__init__(*args, **kwargs)
+        if agent:
+            self.cleaned_data = {'agent': agent.id}
+
+
+    def save(self, powers):
         try:
-            self.form_action(powers, user)
+            self.form_action(powers)
+            # Clear out low powers message
+            agent_id = self.cleaned_data['agent']
+            agent = User.objects.get(id=agent_id)
+            agent.powers_low_message = ''
+            agent.save()
         except:
             raise forms.ValidationError("Failed to save form.")
 
-    def form_action(self, powers, user):
+    def form_action(self, powers):
         power = Powers.objects.get(id=powers.id)
         power.agent_id = self.cleaned_data['agent']
 
@@ -33,6 +47,7 @@ class TransferPowersForm(forms.Form):
 
         power.start_date_transmission = datetime.datetime.now()
         power.save()
+
 
 class BondVoidForm(forms.Form):
     def save(self, bond, user):
