@@ -33,6 +33,8 @@ local_tz = pytz.timezone('US/Eastern')
 admin.site.site_header = 'Shelmore Surety Admin'
 admin.site.index_title = 'Shelmore Surety Admin'
 admin.site.site_title = 'Shelmore Surety Admin'
+
+
 class SuretyAdmin(admin.ModelAdmin):
     pass
 
@@ -219,8 +221,8 @@ class PowersAdmin(admin.ModelAdmin):
             form = TransferPowersForm(request.POST)
             if form.is_valid():
                 try:
-                    form.save(powers, request.user)
-                except:
+                    form.save(powers)
+                except Exception as e:
                     # If save() raised, the form will a have a non
                     # field error containing an informative message.
                     pass
@@ -377,6 +379,7 @@ class BondAdmin(admin.ModelAdmin):
     bond_actions.all_tags = True
 
     def bond_print(self, request, bond_id, *args, **kwargs):
+
         bond = self.get_object(request, bond_id)
         if request.method != 'POST':
             form = BondPrintForm()
