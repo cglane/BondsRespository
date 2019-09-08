@@ -63,6 +63,11 @@ class User(AbstractUser):
         verbose_name = _('agent')
         verbose_name_plural = _('Agents')
 
+    def name(self):
+        if (self.first_name):
+            return self.first_name + ' ' + self.last_name
+        return self.username
+
     def __str__(self):
         if (self.first_name):
             return self.first_name + ' ' + self.last_name

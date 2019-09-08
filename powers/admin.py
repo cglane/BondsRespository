@@ -33,6 +33,8 @@ local_tz = pytz.timezone('US/Eastern')
 admin.site.site_header = 'Shelmore Surety Admin'
 admin.site.index_title = 'Shelmore Surety Admin'
 admin.site.site_title = 'Shelmore Surety Admin'
+
+
 class SuretyAdmin(admin.ModelAdmin):
     pass
 
