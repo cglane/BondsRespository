@@ -4,7 +4,7 @@ import sys
 
 if __name__ == "__main__":
     os.environ['LOCATION_NAME'] = 'local'
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bonds.settings.settings-prod")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bonds.settings.settings-dev")
     try:
         from django.core.management import execute_from_command_line
     except ImportError:

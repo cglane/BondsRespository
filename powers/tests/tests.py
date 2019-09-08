@@ -88,7 +88,7 @@ class TestModels(TestCase):
             'city': 'Charleston',
             'state': 'SC',
             'warrant_number': '234567',
-            'offences': 'crimes and punishment'
+            'offenses': 'crimes and punishment'
         }
         bond_record = Bond(**bond_dict)
         bond_record.defendant = defendant
