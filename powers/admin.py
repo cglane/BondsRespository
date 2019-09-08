@@ -377,6 +377,7 @@ class BondAdmin(admin.ModelAdmin):
     bond_actions.all_tags = True
 
     def bond_print(self, request, bond_id, *args, **kwargs):
+
         bond = self.get_object(request, bond_id)
         if request.method != 'POST':
             form = BondPrintForm()
