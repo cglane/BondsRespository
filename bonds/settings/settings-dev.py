@@ -71,10 +71,10 @@ EMAIL_HOST_USER = os.environ['BONDS_EMAIL_ADDRESS']
 EMAIL_HOST_PASSWORD = os.environ['BONDS_EMAIL_PASSWORD']
 
 INSTALLED_APPS = [
-    'jet', 'powers.apps.CustomAdminConfig','django.contrib.auth',
+    'jet', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
     'django.contrib.messages', 'django.contrib.staticfiles',
-    'powers.apps.AppConfig',
+    'powers.apps.AppConfig', 'powers.apps.CustomAdminConfig',
     'storages','report_builder', 'django_admin_listfilter_dropdown',
 
 ]
