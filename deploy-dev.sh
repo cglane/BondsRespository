@@ -4,6 +4,8 @@
 #
 source envname/bin/activate
 
+python manage.py test powers.tests.tests
+
 python manage.py runserver &
 
 python manage.py test powers.tests.selenium_tests

@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from report_builder.models import Report, Format
 from django.conf import settings
-
+from powers.custom_admin import custom_admin_site
 static_url = getattr(settings, 'STATIC_URL', '/static/')
 
 
@@ -82,8 +82,8 @@ class ReportAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Report, ReportAdmin)
-admin.site.register(Format)
+custom_admin_site.register(Report, ReportAdmin)
+custom_admin_site.register(Format)
 
 
 def export_to_report(modeladmin, request, queryset):
@@ -97,4 +97,4 @@ def export_to_report(modeladmin, request, queryset):
 
 
 if getattr(settings, 'REPORT_BUILDER_GLOBAL_EXPORT', False):
-    admin.site.add_action(export_to_report, 'Export to Report')
+    custom_admin_site.add_action(export_to_report, 'Export to Report')

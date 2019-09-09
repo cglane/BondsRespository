@@ -20,10 +20,7 @@ from django.conf import settings
 from django.contrib.auth.views import login
 from django.views.generic.base import RedirectView
 from django.core.urlresolvers import reverse
-from powers.template_helper import convert_type, agent_powers_count
-
-
-power_type_headers = ["PK{}".format(convert_type(x)) for x in settings.POWERS_TYPES]
+from powers.custom_admin import custom_admin_site
 
 
 urlpatterns = [
@@ -56,10 +53,5 @@ urlpatterns = [
         },
         name='login'
     ),
-    url(r'^admin/', admin.site.urls,
-        {'extra_context': {
-            'all_agents': agent_powers_count(),
-            'power_type_headers': power_type_headers,
-            'power_types': [x[0] for x in settings.POWERS_TYPES]
-        }}),
+    url(r'^admin/', custom_admin_site.urls,),
 ]

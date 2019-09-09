@@ -27,17 +27,30 @@ from powers.models import (
     Powers,
     Bond,
 )
+from powers.custom_admin import custom_admin_site
 
 local_tz = pytz.timezone('US/Eastern')
 
-admin.site.site_header = 'Shelmore Surety Admin'
-admin.site.index_title = 'Shelmore Surety Admin'
-admin.site.site_title = 'Shelmore Surety Admin'
-
+custom_admin_site.site_header = 'Shelmore Surety Admin'
+custom_admin_site.index_title = 'Shelmore Surety Admin'
+custom_admin_site.site_title = 'Shelmore Surety Admin'
 
 class SuretyAdmin(admin.ModelAdmin):
     pass
 
+class GroupAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+    ordering = ('name',)
+    filter_horizontal = ('permissions',)
+
+    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
+        if db_field.name == 'permissions':
+            qs = kwargs.get('queryset', db_field.remote_field.model.objects)
+            # Avoid a major performance hit resolving permission names which
+            # triggers a content_type load:
+            kwargs['queryset'] = qs.select_related('content_type')
+        return super(GroupAdmin, self).formfield_for_manytomany(
+            db_field, request=request, **kwargs)
 
 class BondInlineAdmin(admin.TabularInline):
     fields = ('amount', 'premium', 'related_court', 'offenses',
@@ -411,8 +424,9 @@ class BondAdmin(admin.ModelAdmin):
     actions = [make_voided, ]
 
 
-admin.site.register(SuretyCompany, SuretyAdmin)
-admin.site.register(Defendant, DefendantAdmin)
-admin.site.register(User, AgentAdmin)
-admin.site.register(Powers, PowersAdmin)
-admin.site.register(Bond, BondAdmin)
+custom_admin_site.register(SuretyCompany, SuretyAdmin)
+custom_admin_site.register(Defendant, DefendantAdmin)
+custom_admin_site.register(User, AgentAdmin)
+custom_admin_site.register(Powers, PowersAdmin)
+custom_admin_site.register(Bond, BondAdmin)
+custom_admin_site.register(Group, GroupAdmin)
