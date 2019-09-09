@@ -26,6 +26,7 @@ from powers.models import (
     User,
     Powers,
     Bond,
+    BondFile
 )
 from powers.custom_admin import custom_admin_site
 
@@ -37,6 +38,10 @@ custom_admin_site.site_title = 'Shelmore Surety Admin'
 
 class SuretyAdmin(admin.ModelAdmin):
     pass
+
+
+class BondFileInline(admin.TabularInline):
+    model = BondFile
 
 class GroupAdmin(admin.ModelAdmin):
     search_fields = ('name',)
@@ -290,6 +295,8 @@ class PowersAdmin(admin.ModelAdmin):
 
 
 class BondAdmin(admin.ModelAdmin):
+    inlines= [ BondFileInline,]
+
     list_display = ('__str__', 'issuing_datetime',
                          'has_been_printed', 'bond_actions')
     search_fields = ( 'powers__powers_type',  'agent__first_name',
