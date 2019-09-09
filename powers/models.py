@@ -214,3 +214,9 @@ class Bond(models.Model):
             'name': 'Executing Agent',
             'value': self.agent
         }]
+
+
+class BondFile(models.Model):
+    file = models.FileField(upload_to="bond-files/%Y/%m/%d")
+    name = models.CharField(max_length=50)
+    bond = models.ForeignKey(Bond, on_delete=models.CASCADE, related_name='files')
