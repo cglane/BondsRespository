@@ -302,7 +302,7 @@ class BondAdmin(admin.ModelAdmin):
     search_fields = ( 'powers__powers_type',  'agent__first_name',
                       'agent__last_name', 'defendant__last_name', 'powers__id')
     list_filter = (
-        ('is_active', DropdownFilter),
+        ('status', DropdownFilter),
         ('has_been_printed', DropdownFilter),
     )
     def get_readonly_fields(self, request, obj=None):
@@ -316,14 +316,14 @@ class BondAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
-            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'is_active','has_been_printed',
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
                             'bond_actions', 'make_voided')
         else:
-            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'is_active', 'has_been_printed',
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
                             'bond_actions')
         if not request.user.is_superuser:
             self.list_display = ('__str__', 'issuing_datetime',
-                                 'has_been_printed', 'is_active','bond_actions')
+                                 'has_been_printed', 'status','bond_actions')
             return qs.filter(agent_id=request.user.id)
         return qs
 
