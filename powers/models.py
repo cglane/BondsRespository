@@ -133,7 +133,6 @@ class Bond(models.Model):
 
     defendant = models.ForeignKey(Defendant, on_delete=models.CASCADE)
     voided = models.NullBooleanField(default=False)
-    is_active = models.NullBooleanField(default=True)
     agent = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
