@@ -1,8 +1,10 @@
 # !bin/bash
 
-#set -e
+set -e
 #
 source envname/bin/activate
+
+python manage.py test powers.tests.tests
 
 python manage.py runserver &
 

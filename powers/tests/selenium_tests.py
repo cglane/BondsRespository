@@ -41,12 +41,18 @@ class TestAdmin(StaticLiveServerTestCase):
 		self.driver.find_element_by_id('id_password').send_keys(self.agent['password'])
 		self.driver.find_element_by_xpath('//input[@value="Log in"]').click()
 
+		# ## Make sure inventory not shown
+		try:
+			inventory_object = self.driver.find_element_by_id('id_powers_inventory')
+			assert False
+		except:
+			assert True
 		## Check limitations
 
 		link_div = self.driver.find_element_by_class_name('app-powers')
 		link_headers = link_div.find_elements_by_tag_name('th')
 		link_names = [header.find_element_by_tag_name('a').text for header in link_headers]
-		print(link_names, 'names')
+
 		self.assertTrue('Bonds' in link_names)
 		self.assertTrue('Surety Companies' not in link_names)
 
@@ -58,6 +64,10 @@ class TestAdmin(StaticLiveServerTestCase):
 		self.driver.find_element_by_id('id_username').send_keys(self.super_user['email'])
 		self.driver.find_element_by_id('id_password').send_keys(self.super_user['password'])
 		self.driver.find_element_by_xpath('//input[@value="Log in"]').click()
+
+		###  Make Sure powers inventory shown
+		inventory_object = self.driver.find_element_by_id('id_powers_inventory')
+		assert inventory_object
 
 		##Create Powers Batch
 		powers_link = self.driver.find_element_by_link_text('Powers')
@@ -123,7 +133,7 @@ class TestAdmin(StaticLiveServerTestCase):
 		self.driver.find_element_by_id('id_warrant_number').send_keys('12222')
 		self.driver.find_element_by_id('id_offenses').send_keys('Rape and Murder')
 		self.driver.find_element_by_xpath('//input[@value="Save"]').click()
-		
+
 		self.assertEqual(self.driver.current_url, 'http://localhost:8000/admin/powers/bond/')
 
 		# Print Bond

@@ -7,6 +7,7 @@ from django.db import models
 # -*- coding: utf-8 -*-
 # from django.contrib.auth.models import User
 import uuid
+from powers.handlers import handle_low_powers
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
@@ -56,10 +57,16 @@ class User(AbstractUser):
         upload_to='static/avatars', blank=True, null=True)
     contract_rate = models.FloatField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    powers_low_message = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name = _('agent')
         verbose_name_plural = _('Agents')
+
+    def name(self):
+        if (self.first_name):
+            return self.first_name + ' ' + self.last_name
+        return self.username
 
     def __str__(self):
         if (self.first_name):
@@ -118,10 +125,14 @@ class Powers(models.Model):
 
 class Bond(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    defendant = models.ForeignKey(Defendant, on_delete=models.CASCADE)
     has_been_printed = models.BooleanField(default=False)
+
+    BOND_STATUSES = (('Pending', 'Pending'), ('Discharged', 'Discharged'), ('Dismissed', 'Dismissed'), ('FLTA', 'FLTA'))
+    status = models.CharField(max_length=50, choices=BOND_STATUSES, default='Pending')
+    discharded_date = models.DateTimeField(null=True, blank=True)
+
+    defendant = models.ForeignKey(Defendant, on_delete=models.CASCADE)
     voided = models.NullBooleanField(default=False)
-    is_active = models.NullBooleanField(default=True)
     agent = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -161,6 +172,16 @@ class Bond(models.Model):
                 "Amount of {0} can not be greater than Powers of, {0}".format(
                     self.amount, self.powers.powers_type))
         self.premium = self.amount * getattr(settings, 'BOND_PREMIUM')
+        # Check to see if power type used last of type related to user when creating bond
+        if self._state.adding:
+            agent_power_no_bond = Powers.objects.all().filter(
+                agent__id=self.agent.id,
+                powers_type=self.powers.powers_type,
+                bond__isnull=True
+            )
+            if len(agent_power_no_bond) <= 1:
+                # Send email to administrator
+                handle_low_powers(self.agent, self.powers)
         super(Bond, self).save(*args, **kwargs)
 
     def details(self):
@@ -192,3 +213,9 @@ class Bond(models.Model):
             'name': 'Executing Agent',
             'value': self.agent
         }]
+
+
+class BondFile(models.Model):
+    file = models.FileField(upload_to="bond-files/%Y/%m/%d")
+    name = models.CharField(max_length=50)
+    bond = models.ForeignKey(Bond, on_delete=models.CASCADE, related_name='files')

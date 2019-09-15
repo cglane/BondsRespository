@@ -61,12 +61,21 @@ POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
                 ('100000.00', '100000.00'), ('150000.00', '150000.00'),
                 ('250000.00', '250000.00'), ('500000.00', '500000.00'))
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+ADMIN_EMAILS = ['lshirley@shelmoresurety.com']
+EMAIL_HOST_USER = os.environ['BONDS_EMAIL_ADDRESS']
+EMAIL_HOST_PASSWORD = os.environ['BONDS_EMAIL_PASSWORD']
 
 INSTALLED_APPS = [
-    'jet', 'django.contrib.admin', 'django.contrib.auth',
+    'jet', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'powers',
-    'storages','report_builder',    'django_admin_listfilter_dropdown',
+    'django.contrib.messages', 'django.contrib.staticfiles',
+    'powers.apps.AppConfig', 'powers.apps.CustomAdminConfig',
+    'storages','report_builder', 'django_admin_listfilter_dropdown',
 
 ]
 

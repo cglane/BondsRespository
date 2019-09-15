@@ -26,16 +26,36 @@ from powers.models import (
     User,
     Powers,
     Bond,
+    BondFile
 )
+from powers.custom_admin import custom_admin_site
 
 local_tz = pytz.timezone('US/Eastern')
 
-admin.site.site_header = 'Shelmore Surety Admin'
-admin.site.index_title = 'Shelmore Surety Admin'
-admin.site.site_title = 'Shelmore Surety Admin'
+custom_admin_site.site_header = 'Shelmore Surety Admin'
+custom_admin_site.index_title = 'Shelmore Surety Admin'
+custom_admin_site.site_title = 'Shelmore Surety Admin'
+
 class SuretyAdmin(admin.ModelAdmin):
     pass
 
+
+class BondFileInline(admin.TabularInline):
+    model = BondFile
+
+class GroupAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+    ordering = ('name',)
+    filter_horizontal = ('permissions',)
+
+    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
+        if db_field.name == 'permissions':
+            qs = kwargs.get('queryset', db_field.remote_field.model.objects)
+            # Avoid a major performance hit resolving permission names which
+            # triggers a content_type load:
+            kwargs['queryset'] = qs.select_related('content_type')
+        return super(GroupAdmin, self).formfield_for_manytomany(
+            db_field, request=request, **kwargs)
 
 class BondInlineAdmin(admin.TabularInline):
     fields = ('amount', 'premium', 'related_court', 'offenses',
@@ -219,8 +239,8 @@ class PowersAdmin(admin.ModelAdmin):
             form = TransferPowersForm(request.POST)
             if form.is_valid():
                 try:
-                    form.save(powers, request.user)
-                except:
+                    form.save(powers)
+                except Exception as e:
                     # If save() raised, the form will a have a non
                     # field error containing an informative message.
                     pass
@@ -275,12 +295,14 @@ class PowersAdmin(admin.ModelAdmin):
 
 
 class BondAdmin(admin.ModelAdmin):
+    inlines= [ BondFileInline,]
+
     list_display = ('__str__', 'issuing_datetime',
                          'has_been_printed', 'bond_actions')
     search_fields = ( 'powers__powers_type',  'agent__first_name',
                       'agent__last_name', 'defendant__last_name', 'powers__id')
     list_filter = (
-        ('is_active', DropdownFilter),
+        ('status', DropdownFilter),
         ('has_been_printed', DropdownFilter),
     )
     def get_readonly_fields(self, request, obj=None):
@@ -294,14 +316,14 @@ class BondAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
-            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'is_active','has_been_printed',
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
                             'bond_actions', 'make_voided')
         else:
-            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'is_active', 'has_been_printed',
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
                             'bond_actions')
         if not request.user.is_superuser:
             self.list_display = ('__str__', 'issuing_datetime',
-                                 'has_been_printed', 'is_active','bond_actions')
+                                 'has_been_printed', 'status','bond_actions')
             return qs.filter(agent_id=request.user.id)
         return qs
 
@@ -377,6 +399,7 @@ class BondAdmin(admin.ModelAdmin):
     bond_actions.all_tags = True
 
     def bond_print(self, request, bond_id, *args, **kwargs):
+
         bond = self.get_object(request, bond_id)
         if request.method != 'POST':
             form = BondPrintForm()
@@ -408,8 +431,9 @@ class BondAdmin(admin.ModelAdmin):
     actions = [make_voided, ]
 
 
-admin.site.register(SuretyCompany, SuretyAdmin)
-admin.site.register(Defendant, DefendantAdmin)
-admin.site.register(User, AgentAdmin)
-admin.site.register(Powers, PowersAdmin)
-admin.site.register(Bond, BondAdmin)
+custom_admin_site.register(SuretyCompany, SuretyAdmin)
+custom_admin_site.register(Defendant, DefendantAdmin)
+custom_admin_site.register(User, AgentAdmin)
+custom_admin_site.register(Powers, PowersAdmin)
+custom_admin_site.register(Bond, BondAdmin)
+custom_admin_site.register(Group, GroupAdmin)

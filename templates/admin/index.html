@@ -1,0 +1,32 @@
+{% extends "admin/index.html" %}
+
+	{% block sidebar %}
+		{{block.super}}
+		{% if request.user.is_superuser %}
+
+			<div id="id_powers_inventory" class="module">
+				<table>
+					<caption>
+						<a title="Powers Inventory">Powers Inventory</a>
+					</caption>
+					<thead>
+						<tr>
+							<th>Agent</th>
+							{% for type in power_type_headers %}
+								<th>{{type}}</th>
+							{% endfor %}
+						</tr>
+					</thead>
+					<tbody>
+						{% for r in all_agents %}
+							<tr>
+								{% for field in r %}
+									<td>{{ field }}</td>
+								{% endfor %}
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% endif %}
+	{% endblock %}
