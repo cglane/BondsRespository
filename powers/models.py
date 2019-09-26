@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+import locale
+locale.setlocale(locale.LC_ALL, 'en_US')
 from django.db import models
 
 # Create your models here.
@@ -91,10 +92,7 @@ class Defendant(models.Model):
 
 
 class Powers(models.Model):
-    POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
-                    ('25000.00', '25000.00'), ('50000.00', '50000.00'),
-                    ('100000.00', '100000.00'), ('150000.00', '150000.00'),
-                    ('250000.00', '250000.00'), ('500000.00', '500000.00'))
+    POWERS_TYPES = getattr(settings, 'POWERS_TYPES')
     powers_type = models.CharField(max_length=50, choices=POWERS_TYPES)
     start_date_transmission = models.DateTimeField(blank=True, null=True, editable=False)
     end_date_field = models.DateField(editable=False)
@@ -106,7 +104,7 @@ class Powers(models.Model):
         verbose_name_plural = "powers"
 
     def __str__(self):
-        return "ID{0} TP{1}".format(str(self.id), self.powers_type)
+        return "ID{0} TP{1}".format(str(self.id), locale.format("%d", float(self.powers_type), grouping=True))
 
     def print_amount_dollars(self):
         amount = float(self.powers_type)
