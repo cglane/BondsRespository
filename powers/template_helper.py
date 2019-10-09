@@ -2,7 +2,7 @@ from django.db.models import Count
 from django.conf import settings
 
 from powers.models import User, Powers
-
+from datetime import datetime
 
 def pluck_type(type, powers):
     for item in powers:
@@ -17,12 +17,13 @@ def agent_powers_count():
     types = [x[0] for x in settings.POWERS_TYPES]
     agents = User.objects.all().filter(is_superuser=False, is_active=True, is_staff=True)
     for local_user in agents:
-        agent_list = [local_user.first_name, ]
+        agent_list = [local_user.name, ]
 
         # Retrieve agent powers
         # <QuerySet [{'powers_type': '5000.00', 'total': 10}, ]>
         powers = Powers.objects.all()\
             .filter(agent__id=local_user.id,
+                    end_date_field__gte=datetime.now(),
                     bond__isnull=True)\
             .values('powers_type')\
             .annotate(total=Count('powers_type'))\
