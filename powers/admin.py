@@ -57,6 +57,7 @@ class GroupAdmin(admin.ModelAdmin):
         return super(GroupAdmin, self).formfield_for_manytomany(
             db_field, request=request, **kwargs)
 
+
 class BondInlineAdmin(admin.TabularInline):
     fields = ('amount', 'premium', 'related_court', 'offenses',
               'warrant_number', 'state', 'city', 'county', 'agent', 'powers',
@@ -305,6 +306,15 @@ class BondAdmin(admin.ModelAdmin):
         ('status', DropdownFilter),
         ('has_been_printed', DropdownFilter),
     )
+
+    def delete_model(self, request, obj):
+        obj.delete()
+
+    def get_actions(self, request):
+        actions = super(BondAdmin, self).get_actions(request)
+        del actions['delete_selected']
+        return actions
+
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = []
         if request.user.username not in getattr(settings, 'VOID_WHITELIST'):
@@ -324,7 +334,7 @@ class BondAdmin(admin.ModelAdmin):
         if not request.user.is_superuser:
             self.list_display = ('__str__', 'issuing_datetime',
                                  'has_been_printed', 'status','bond_actions')
-            return qs.filter(agent_id=request.user.id)
+            return qs.filter(agent_id=request.user.id, deleted_at=None)
         return qs
 
     def get_form(self, request, obj=None, **kwargs):
@@ -428,7 +438,8 @@ class BondAdmin(admin.ModelAdmin):
             'print/bond_print.html',
             context,
         )
-    actions = [make_voided, ]
+
+    actions = [make_voided ]
 
 
 custom_admin_site.register(SuretyCompany, SuretyAdmin)
