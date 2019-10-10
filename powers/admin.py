@@ -29,6 +29,7 @@ from powers.models import (
     BondFile
 )
 from powers.custom_admin import custom_admin_site
+from django.contrib.admin.actions import delete_selected as _delete_selected
 
 local_tz = pytz.timezone('US/Eastern')
 
@@ -307,13 +308,22 @@ class BondAdmin(admin.ModelAdmin):
         ('has_been_printed', DropdownFilter),
     )
 
+    # Hide delete button on edit
+    def change_view(self, request, object_id=None, form_url='', extra_context=None):
+        return super().change_view(request, object_id, form_url, extra_context={})
+
+    # Make sure it is a soft delete for bond
+    def delete_selected(self, request, queryset):
+        def delete():
+            for obj in queryset:
+                self.delete_model(request, obj)
+
+        queryset.delete = delete
+        return _delete_selected(self, request, queryset)
+
+    # Set deleted at date
     def delete_model(self, request, obj):
         obj.delete()
-
-    def get_actions(self, request):
-        actions = super(BondAdmin, self).get_actions(request)
-        del actions['delete_selected']
-        return actions
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = []
@@ -439,7 +449,7 @@ class BondAdmin(admin.ModelAdmin):
             context,
         )
 
-    actions = [make_voided ]
+    actions = [make_voided, delete_selected ]
 
 
 custom_admin_site.register(SuretyCompany, SuretyAdmin)
