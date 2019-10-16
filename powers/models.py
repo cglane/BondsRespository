@@ -159,10 +159,18 @@ class Bond(models.Model):
     state = models.CharField(max_length=20, )
     warrant_number = models.TextField()
     offenses = models.TextField()
+    deleted_at = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return str(self.powers) + ' ' + self.defendant.last_name
 
+    def delete(self):
+        self.deleted_at = datetime.now()
+        self.save()
+
+    def delete_selected(self):
+        print('selected')
+        pass
     def save(self, *args, **kwargs):
         # Check make sure amount is not greater than the powers.
         if self.amount > float(self.powers.powers_type):

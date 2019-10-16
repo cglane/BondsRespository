@@ -29,6 +29,7 @@ from powers.models import (
     BondFile
 )
 from powers.custom_admin import custom_admin_site
+from django.contrib.admin.actions import delete_selected as _delete_selected
 
 local_tz = pytz.timezone('US/Eastern')
 
@@ -56,6 +57,7 @@ class GroupAdmin(admin.ModelAdmin):
             kwargs['queryset'] = qs.select_related('content_type')
         return super(GroupAdmin, self).formfield_for_manytomany(
             db_field, request=request, **kwargs)
+
 
 class BondInlineAdmin(admin.TabularInline):
     fields = ('amount', 'premium', 'related_court', 'offenses',
@@ -305,6 +307,24 @@ class BondAdmin(admin.ModelAdmin):
         ('status', DropdownFilter),
         ('has_been_printed', DropdownFilter),
     )
+
+    # Hide delete button on edit
+    def change_view(self, request, object_id=None, form_url='', extra_context=None):
+        return super().change_view(request, object_id, form_url, extra_context={})
+
+    # Make sure it is a soft delete for bond
+    def delete_selected(self, request, queryset):
+        def delete():
+            for obj in queryset:
+                self.delete_model(request, obj)
+
+        queryset.delete = delete
+        return _delete_selected(self, request, queryset)
+
+    # Set deleted at date
+    def delete_model(self, request, obj):
+        obj.delete()
+
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = []
         if request.user.username not in getattr(settings, 'VOID_WHITELIST'):
@@ -317,14 +337,14 @@ class BondAdmin(admin.ModelAdmin):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
-                            'bond_actions', 'make_voided')
+                            'bond_actions', 'make_voided', 'deleted_at')
         else:
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
                             'bond_actions')
         if not request.user.is_superuser:
             self.list_display = ('__str__', 'issuing_datetime',
                                  'has_been_printed', 'status','bond_actions')
-            return qs.filter(agent_id=request.user.id)
+            return qs.filter(agent_id=request.user.id, deleted_at=None)
         return qs
 
     def get_form(self, request, obj=None, **kwargs):
@@ -428,7 +448,8 @@ class BondAdmin(admin.ModelAdmin):
             'print/bond_print.html',
             context,
         )
-    actions = [make_voided, ]
+
+    actions = [make_voided, delete_selected ]
 
 
 custom_admin_site.register(SuretyCompany, SuretyAdmin)
