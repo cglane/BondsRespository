@@ -117,3 +117,5 @@ class BondStatus():
 		# Return results if any
 		return self._parse_results()
 
+	def quit(self):
+		self.driver.quit()

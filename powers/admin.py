@@ -14,7 +14,7 @@ from django.contrib.auth.models import User, Group
 from powers.forms import TransferPowersForm, BondPrintForm, AgentForm, PowersBatchForm
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from powers.utils import create_powers_batch_custom
+from powers.utils import create_powers_batch_custom, run_bond_status_bot
 import pytz
 from django.shortcuts import render
 from django_admin_listfilter_dropdown.filters import (
@@ -386,7 +386,7 @@ class BondAdmin(admin.ModelAdmin):
                 name='bond_print'),
             url(r'^(?P<bond_id>.+)/bond_void_view/$',
                 self.admin_site.admin_view(self.bond_void_view),
-                name='bond_void_view'),                
+                name='bond_void_view'),
         ]
 
         return custom_urls + urls
@@ -449,7 +449,12 @@ class BondAdmin(admin.ModelAdmin):
             context,
         )
 
-    actions = [make_voided, delete_selected ]
+    def run_bot(self, request, queryset):
+        run_bond_status_bot(queryset)
+        self.message_user(request, 'Success')
+        return redirect('/admin/powers/bonds')
+
+    actions = [make_voided, delete_selected, run_bot]
 
 
 custom_admin_site.register(SuretyCompany, SuretyAdmin)
