@@ -27,17 +27,22 @@ def run_bond_status_bot(queryset):
     status_bot = BondStatus()
     for bond in queryset:
         try:
-            warrant_bare = bond.warrant_number
-            warrant_number = bond.warrant_number.split(' ')
-            if warrant_number:
-                status = status_bot.run_bot(bond.county, warrant_number)
+            if bond.warrant_number:
+                if  "\n" in bond.warrant_number:
+                    local_warrant_number = bond.warrant_number.split("\n")[0]
+                elif "\t" in bond.warrant_number:
+                    local_warrant_number = bond.warrant_number.split("\t")[0]
+                elif " " in bond.warrant_number:
+                    local_warrant_number = bond.warrant_number.split(" ")[0]
+            if local_warrant_number:
+                status = status_bot.run_bot(bond.county, local_warrant_number)
+                # Note: Need to map status to the four options
                 if status:
                     bond.status = status
         except BotException as e:
             bond.bot_error = str(e)
         except Exception as e:
             bond.bot_error = str(e)
-
         bond.save()
 
     status_bot.quit()
