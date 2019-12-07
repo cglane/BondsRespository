@@ -128,7 +128,8 @@ class Bond(models.Model):
     BOND_STATUSES = (('Pending', 'Pending'), ('Discharged', 'Discharged'), ('Dismissed', 'Dismissed'), ('FLTA', 'FLTA'))
     status = models.CharField(max_length=50, choices=BOND_STATUSES, default='Pending')
     discharded_date = models.DateTimeField(null=True, blank=True)
-    bot_error = models.CharField(max_length=100, editable=False, default='')
+    bot_error = models.CharField(max_length=100, default='')
+    bot_last_run = models.DateField(blank=True, null=True)
     defendant = models.ForeignKey(Defendant, on_delete=models.CASCADE)
     voided = models.NullBooleanField(default=False)
     agent = models.ForeignKey(

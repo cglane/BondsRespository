@@ -33,9 +33,11 @@ def run_bond_status_bot(queryset):
                 status = status_bot.run_bot(bond.county, warrant_number)
                 if status:
                     bond.status = status
-                    bond.save()
         except BotException as e:
             bond.bot_error = str(e)
         except Exception as e:
             bond.bot_error = str(e)
+
+        bond.save()
+
     status_bot.quit()

@@ -337,7 +337,7 @@ class BondAdmin(admin.ModelAdmin):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
-                            'bond_actions', 'make_voided', 'deleted_at')
+                            'bond_actions', 'make_voided', 'deleted_at', 'bot_error', 'bot_last_run')
         else:
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
                             'bond_actions')
@@ -452,7 +452,7 @@ class BondAdmin(admin.ModelAdmin):
     def run_bot(self, request, queryset):
         run_bond_status_bot(queryset)
         self.message_user(request, 'Success')
-        return redirect('/admin/powers/bonds')
+        return redirect('/admin/powers/bond')
 
     actions = [make_voided, delete_selected, run_bot]
 

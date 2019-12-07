@@ -95,7 +95,7 @@ class BondStatus():
 		self.driver.get(self.base_url)
 		county_key = self._format_county_name(county)
 		if not county_key:
-			raise BotException("County not found for name".format(county))
+			raise BotException("County not found for name: {}".format(county))
 		try:
 			self.driver.find_element_by_link_text(county_key).click()
 		except:
