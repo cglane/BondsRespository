@@ -4,10 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
-test_url = 'https://www.sccourts.org/caseSearch/'
-county = 'Abbeville'
-
 SC_COUNTIES = {
 	"Abbeville,": ["Abbeville", 'Abbe'],
 	"Aiken,": ["Aiken"],
@@ -60,9 +56,9 @@ class BotException(Exception):
 	pass
 
 class BondStatus():
-	def __init__(self, base_url):
+	def __init__(self):
 		self.driver = webdriver.Chrome()
-		self.base_url = base_url
+		self.base_url = "https://www.sccourts.org/caseSearch/"
 
 	def _format_county_name(self, bond_county):
 		"""For search county must be full name followed by a comma
@@ -76,7 +72,7 @@ class BondStatus():
 		try:
 			self.driver.find_element_by_id("ContentPlaceHolder1_ButtonAccept").click()
 		except:
-			BotException("Could not enter county site")
+			raise BotException("Could not enter county site")
 
 	def _fill_form(self, warrant_id):
 		try:
@@ -84,10 +80,8 @@ class BondStatus():
 			case_field.send_keys(warrant_id)
 			self.driver.find_element_by_id('ContentPlaceHolder1_ButtonSearch').click()
 			self.results_table = self.driver.find_element_by_id('ContentPlaceHolder1_SearchResults')
-			if not self.results_table:
-				BotException("No results with warrant number: {}".format(warrant_id))
-		except:
-			BotException("Unhandled exception filling form.")
+		except Exception as e:
+			raise BotException("No results with warrant number: {}".format(warrant_id))
 
 	def _parse_results(self):
 		try:
@@ -95,18 +89,17 @@ class BondStatus():
 			table_rows = self.results_table.find_elements(By.XPATH, '//td')
 			return table_rows[7].text
 		except:
-			BotException("Error fetching case status.")
+			raise BotException("Error fetching case status.")
 
 	def find_county(self, county):
 		self.driver.get(self.base_url)
 		county_key = self._format_county_name(county)
-
 		if not county_key:
-			BotException("County not found for name".format(county))
+			raise BotException("County not found for name".format(county))
 		try:
 			self.driver.find_element_by_link_text(county_key).click()
 		except:
-			BotException("County not found with key: {}".format(county_key))
+			raise BotException("County not found with key: {}".format(county_key))
 
 	def run_bot(self, county, warrant_id):
 		# Go to base url and find county from map

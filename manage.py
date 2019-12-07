@@ -2,6 +2,7 @@
 import os
 import sys
 
+
 if __name__ == "__main__":
     os.environ['LOCATION_NAME'] = 'local'
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bonds.settings.settings-dev")

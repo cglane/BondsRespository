@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import sys
+from dotenv import load_dotenv
+load_dotenv()
 def location(x):
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), x)
 

@@ -10,6 +10,8 @@ python manage.py runserver &
 
 python manage.py test powers.tests.selenium_tests
 
+python manage.py test powers.tests.bot_tests
+
 pip freeze > requirements.txt
 
 git add .
