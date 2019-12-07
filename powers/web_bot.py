@@ -8,6 +8,44 @@ from selenium.webdriver.support import expected_conditions as EC
 test_url = 'https://www.sccourts.org/caseSearch/'
 county = 'Abbeville'
 
+SC_COUNTIES = {
+	"Abbeville,": ["Abbeville", 'Abbe'],
+	"Aiken,": ["Aiken"],
+	"Bamberg": ["Bamberg", "Bamb"],
+	"Barnwell": ["Barnwell", "Barn"],
+	"Beaufort": ["Beaufort", "Beau"],
+	"Berkeley": ["berk", "BERK", "berkeley", "Berkley", "Moncks Corner"],
+	"Calhoun": ["Calhoun",],
+	"Charleston": ["Charleson", "Charleston", "Chas", "North Charleston"],
+	"Cherokee": ["Cherokee"],
+	"Chester": ["Chester"],
+	"Chesterfield": ["Chesterfield"],
+	"Clarendon": ["Clarendon"],
+	"Colleton": ["Colleton"],
+	"Darlington": ["Darlington"],
+	"Dillon": ["Dillon"],
+	"Dorchester": ["Dorchester", "DORCH"],
+	"Edgefield": ["Edgefield"],
+	"Richland": ["Columbia", "Richland"],
+	"Fairfield": ["Fairfield"],
+	"Florence": ["Florence"],
+	"Georgetown": ["Georgetown"],
+	"Greenville,": ['Greenville', 'Greenv', "Greenvillie"],
+	"Greenwood": ["Greenwood"],
+	"Hampton": ["Hampton"],
+	"Horry": ["Horry"],
+	"Jasper": ["Jasper"]
+	"Kershaw": ["Kershaw"],
+	"Lexington": ["Lexingon", "Lexington", "Lexinton"],
+	"Newberry": ["Newberry"],
+	"Orangeburg": ["Orangeburg", "Orangburg"],
+	"Pickens": ["Pickens"],
+	"Saluda": ["Saluda"],
+	"Spartanburg": ["Spartanburg", "Sparrtanburg"],
+	"Sumter": ["Sumter"]
+
+
+}
 class BotException(Exception):
 	pass
 
