@@ -55,8 +55,7 @@ class BotException(Exception):
 
 class BondStatus():
 	def __init__(self):
-		self.driver = webdriver.Chrome(ChromeDriverManager().install())
-
+		self.driver = webdriver.Chrome()
 		self.base_url = "https://www.sccourts.org/caseSearch/"
 
 	def _format_county_name(self, bond_county):
