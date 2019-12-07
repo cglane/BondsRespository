@@ -7,6 +7,8 @@ cached-property==1.5.1
 cement==2.8.2
 chromedriver==2.24.1
 colorama==0.3.9
+configparser==4.0.2
+crayons==0.3.0
 Django==1.11.10
 django-admin-list-filter-dropdown==1.0.2
 django-cors-headers==2.1.0
@@ -51,6 +53,7 @@ termcolor==1.1.0
 texttable==0.9.1
 urllib3==1.22
 wcwidth==0.1.7
+webdriver-manager==2.3.0
 webencodings==0.5.1
 websocket-client==0.46.0
 yapf==0.20.1

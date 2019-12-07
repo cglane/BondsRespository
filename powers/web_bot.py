@@ -1,8 +1,6 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 SC_COUNTIES = {
 	"Abbeville,": ["Abbeville", 'Abbe'],
@@ -57,7 +55,8 @@ class BotException(Exception):
 
 class BondStatus():
 	def __init__(self):
-		self.driver = webdriver.Chrome()
+		self.driver = webdriver.Chrome(ChromeDriverManager().install())
+
 		self.base_url = "https://www.sccourts.org/caseSearch/"
 
 	def _format_county_name(self, bond_county):
