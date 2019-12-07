@@ -26,7 +26,6 @@ SC_COUNTIES = {
 	"Dillon": ["Dillon"],
 	"Dorchester": ["Dorchester", "DORCH"],
 	"Edgefield": ["Edgefield"],
-	"Richland": ["Columbia", "Richland"],
 	"Fairfield": ["Fairfield"],
 	"Florence": ["Florence"],
 	"Georgetown": ["Georgetown"],
@@ -34,15 +33,26 @@ SC_COUNTIES = {
 	"Greenwood": ["Greenwood"],
 	"Hampton": ["Hampton"],
 	"Horry": ["Horry"],
-	"Jasper": ["Jasper"]
+	"Jasper": ["Jasper"],
 	"Kershaw": ["Kershaw"],
+	"Lancaster": ["Lancaster"],
+	"Laurens": ["Laurens"],
+	"Lee": ["Lee"],
 	"Lexington": ["Lexingon", "Lexington", "Lexinton"],
+	"Marion": ["Marion"],
+	"Marlboro": ["Marlboro"],
+	"McCormick": ["McCormick"],
 	"Newberry": ["Newberry"],
+	"Oconee": ["Oconee"],
 	"Orangeburg": ["Orangeburg", "Orangburg"],
 	"Pickens": ["Pickens"],
+	"Richland": ["Columbia", "Richland"],
 	"Saluda": ["Saluda"],
 	"Spartanburg": ["Spartanburg", "Sparrtanburg"],
-	"Sumter": ["Sumter"]
+	"Sumter": ["Sumter"],
+	"Union": ["Union"],
+	"Williamsburg": ["Williamsburg"],
+	"York": ["York"]
 
 
 }
