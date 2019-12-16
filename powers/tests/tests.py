@@ -5,9 +5,9 @@ from powers.models import SuretyCompany, User, Defendant, Bond, Powers
 from powers.utils import create_powers_batch, create_powers_batch_custom
 from django.contrib.auth.models import (Group, Permission)
 from powers.forms import TransferPowersForm
-
 # Create your tests here.
 from datetime import datetime
+from django.urls import reverse
 
 def create_bond(agent):
     bond_dict = {
@@ -80,6 +80,9 @@ class TestModels(TestCase):
         ## Create Powers
         create_powers_batch()
 
+        self.username = 'content_tester'
+        self.password = 'goldenstandard'
+        self.user = User.objects.create_superuser(self.username, 'test@example.com', self.password)
 
     def test_create_bond(self):
         type = '5000.00'
@@ -120,3 +123,33 @@ class TestModels(TestCase):
         bond_record = create_bond(agent)
         agent = User.objects.get(first_name='Juan')
         assert not agent.powers_low_message
+
+    def test_update_bond_status(self):
+        type = '5000.00'
+
+        agent = User.objects.get(first_name='Juan')
+        transfer_form = TransferPowersForm(agent_test=agent)
+        create_powers_batch_custom(1, type)
+        powers_of_type = Powers.objects.all().filter(powers_type=type, bond__isnull=True, agent__isnull=True)
+        transfer_form.save(powers=powers_of_type[0])
+        # Create Bond
+        bond_record = create_bond(agent)
+        bond_record.warrant_number = '20190420152183'
+        bond_record.county = 'Charleston'
+        bond_record.save()
+        print(bond_record.id, 'id')
+        self.assertEquals(bond_record.has_been_printed, False)
+        self.assertEquals(bond_record.powers.powers_type, type)
+
+        data = {'action': 'run_bot',
+                '_selected_action': [bond_record.id, ]}
+        change_url = reverse('admin:powers_bond_changelist')
+        self.client.login(username=self.username, password=self.password)
+        self.client.post(change_url, data)
+        self.client.logout()
+        bond = Bond.objects.filter(id=bond_record.id).first()
+        assert bond.bot_last_run
+        assert bond.status == 'Pending'
+        assert not bond.bot_error
+
+

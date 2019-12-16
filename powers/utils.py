@@ -27,6 +27,7 @@ def run_bond_status_bot(queryset):
     status_bot = BondStatus()
     for bond in queryset:
         try:
+            local_warrant_number = None
             if bond.warrant_number:
                 if  "\n" in bond.warrant_number:
                     local_warrant_number = bond.warrant_number.split("\n")[0]
