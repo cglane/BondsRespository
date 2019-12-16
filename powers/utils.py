@@ -46,6 +46,9 @@ def run_bond_status_bot(queryset):
                         bond.status = 'FLTA'
                     else:
                         bond.status = 'Pending'
+
+                    # We want to remove bot error if run successfully
+                    bond.bot_error = ''
         except BotException as e:
             bond.bot_error = str(e)
         except Exception as e:

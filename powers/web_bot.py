@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
 SC_COUNTIES = {
 	"Abbeville,": ["Abbeville", 'Abbe'],
@@ -55,7 +56,12 @@ class BotException(Exception):
 
 class BondStatus():
 	def __init__(self):
-		self.driver = webdriver.Chrome()
+		options = Options()
+		options.add_argument("--headless")
+		options.add_argument('window-size=1920x1080')
+
+		self.driver = webdriver.Chrome(options=options)
+
 		self.base_url = "https://www.sccourts.org/caseSearch/"
 
 	def _format_county_name(self, bond_county):
@@ -69,7 +75,7 @@ class BondStatus():
 	def _accept_terms(self):
 		try:
 			self.driver.find_element_by_id("ContentPlaceHolder1_ButtonAccept").click()
-		except:
+		except Exception as e:
 			raise BotException("Could not enter county site")
 
 	def _fill_form(self, warrant_id):
@@ -96,6 +102,7 @@ class BondStatus():
 			raise BotException("County not found for name: {}".format(county))
 		try:
 			self.driver.find_element_by_link_text(county_key).click()
+
 		except:
 			raise BotException("County not found with key: {}".format(county_key))
 
