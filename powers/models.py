@@ -172,6 +172,7 @@ class Bond(models.Model):
     def delete_selected(self):
         print('selected')
         pass
+
     def save(self, *args, **kwargs):
         # Check make sure amount is not greater than the powers.
         if self.amount > float(self.powers.powers_type):

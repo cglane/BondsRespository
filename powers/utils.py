@@ -38,11 +38,18 @@ def run_bond_status_bot(queryset):
                 status = status_bot.run_bot(bond.county, local_warrant_number)
                 # Note: Need to map status to the four options
                 if status:
-                    bond.status = status
+                    lower_status = status.lower()
+                    if 'discharged' in lower_status or 'dismissed' in lower_status:
+                        bond.status = 'Discharged'
+                    elif 'failure to appear' in lower_status:
+                        bond.status = 'FLTA'
+                    else:
+                        bond.status = 'Pending'
         except BotException as e:
             bond.bot_error = str(e)
         except Exception as e:
             bond.bot_error = str(e)
+        bond.bot_last_run = datetime.datetime.now()
         bond.save()
 
     status_bot.quit()
