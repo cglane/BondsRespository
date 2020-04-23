@@ -2,7 +2,7 @@
 
 set -e
 #
-source envname/bin/activate
+source venv/bin/activate
 
 python manage.py test powers.tests.tests
 
