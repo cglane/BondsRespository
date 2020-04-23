@@ -12,9 +12,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import sys
+from dotenv import load_dotenv, find_dotenv
+load_dotenv()
+
 def location(x):
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), x)
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -215,5 +217,4 @@ STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-#
 
