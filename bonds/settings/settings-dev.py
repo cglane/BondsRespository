@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import sys
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
+load_dotenv()
 
 def location(x):
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), x)
@@ -49,8 +50,7 @@ BOND_PRINT_CONTENT_THREE = 'and provided this Power-Of-Attorney is filed with th
 
 BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this <span class='long-date'>{1}</span>."
 # Application definition
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
+
 VOID_WHITELIST = ['charleslane23@gmail.com',
                   'mfarmer@thefarmerlawfirm.com',
                   'lowndes.sinkler@sinklerbonding.com',
