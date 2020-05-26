@@ -19,7 +19,6 @@ from django.contrib import admin
 from django.conf import settings
 from django.contrib.auth.views import login
 from django.views.generic.base import RedirectView
-from django.core.urlresolvers import reverse
 from powers.custom_admin import custom_admin_site
 
 

@@ -1,11 +1,17 @@
 from django.contrib import admin
 from django.contrib.admin import SimpleListFilter
 from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.utils.safestring import mark_safe
 from report_builder.models import Report, Format
 from django.conf import settings
-from powers.custom_admin import custom_admin_site
+
+try:
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
+
+
 static_url = getattr(settings, 'STATIC_URL', '/static/')
 
 
@@ -34,6 +40,7 @@ class ReportAdmin(admin.ModelAdmin):
 
     class Media:
         js = [
+            'admin/js/jquery.init.js',
             static_url + 'report_builder/js/report_list.js',
             static_url + 'report_builder/js/report_form.js']
 
@@ -61,9 +68,9 @@ class ReportAdmin(admin.ModelAdmin):
             img = static_url + 'report_builder/img/star.png'
         else:
             img = static_url + 'report_builder/img/unstar.png'
-        return '<a href="javascript:void(0)" onclick="ajax_add_star(this, \'{0}\')"><img style="width: 26px; margin: -6px;" src="{1}"/></a>'.format(
+        return mark_safe('<a href="javascript:void(0)" onclick="ajax_add_star(this, \'{0}\')"><img style="width: 26px; margin: -6px;" src="{1}"/></a>'.format(
             reverse('ajax_add_star', args=[obj.id]),
-            img)
+            img))
     ajax_starred.allow_tags = True
     ajax_starred.short_description = "Starred"
 
@@ -82,8 +89,8 @@ class ReportAdmin(admin.ModelAdmin):
 
 
 
-custom_admin_site.register(Report, ReportAdmin)
-custom_admin_site.register(Format)
+admin.site.register(Report, ReportAdmin)
+admin.site.register(Format)
 
 
 def export_to_report(modeladmin, request, queryset):
@@ -97,4 +104,4 @@ def export_to_report(modeladmin, request, queryset):
 
 
 if getattr(settings, 'REPORT_BUILDER_GLOBAL_EXPORT', False):
-    custom_admin_site.add_action(export_to_report, 'Export to Report')
+    admin.site.add_action(export_to_report, 'Export to Report')
