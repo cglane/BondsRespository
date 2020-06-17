@@ -55,7 +55,7 @@ VOID_WHITELIST = ['charleslane23@gmail.com',
                   'mfarmer@thefarmerlawfirm.com',
                   'lowndes.sinkler@sinklerbonding.com',
                   'hward@shelmoresurety.com',
-                  'lshirley@shelmoresurety.com',
+                  'nfrierson@shelmoresurety.com'
                   ]
 
 POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
@@ -68,7 +68,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-ADMIN_EMAILS = ['lshirley@shelmoresurety.com']
+ADMIN_EMAILS = ['info@shelmoresurety.com']
 EMAIL_HOST_USER = os.environ['BONDS_EMAIL_ADDRESS']
 EMAIL_HOST_PASSWORD = os.environ['BONDS_EMAIL_PASSWORD']
 
