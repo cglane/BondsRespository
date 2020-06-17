@@ -1,9 +1,9 @@
 attrs==19.3.0
-awsebcli==3.18.1
+awsebcli==3.14.6
 bcrypt==3.1.7
 blessed==1.17.8
-boto3==1.14.5
-botocore==1.17.5
+boto3==1.5.30
+botocore==1.8.44
 cached-property==1.5.1
 cement==2.8.2
 certifi==2020.4.5.2
@@ -49,7 +49,7 @@ python-dotenv==0.13.0
 pytz==2020.1
 PyYAML==5.3.1
 requests==2.20.1
-s3transfer==0.3.3
+s3transfer==0.1.10
 selenium==3.10.0
 semantic-version==2.5.0
 six==1.11.0
