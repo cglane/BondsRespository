@@ -132,6 +132,7 @@ if os.environ.get('ENVIRONMENT_NAME') == 'development':
         }
     }
 else:
+    print("here I am")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
