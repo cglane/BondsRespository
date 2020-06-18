@@ -1,4 +1,4 @@
-Django==1.11.17
+Django==1.11.29
 django-admin-list-filter-dropdown
 django-cors-headers==2.1.0
 django-filter==1.1.0
