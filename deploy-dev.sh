@@ -14,5 +14,4 @@ pip freeze > requirements.txt
 
 # echo "yes" | python manage.py collectstatic
 
-#eb deploy --profile bonds bonds-dev
 eb deploy --profile bonds bonds-dev-37

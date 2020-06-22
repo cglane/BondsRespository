@@ -56,20 +56,41 @@ class TestAdmin(StaticLiveServerTestCase):
 		self.assertTrue('Bonds' in link_names)
 		self.assertTrue('Surety Companies' not in link_names)
 
+		# Print Bond
+		self.driver.get('http://localhost:8000/admin/')
+		bonds_link = self.driver.find_element_by_link_text('Bonds')
+		bonds_link.click()
+		# Print Thrice
+		print_link = self.driver.find_element_by_link_text('Print Bond')
+		print_link.click()
+		print_link = self.driver.find_element_by_id('print-submit')
+		print_link.click()
+
+		self.driver.get('http://localhost:8000/admin/powers/bond/')
+		print_link = self.driver.find_element_by_link_text('Print Bond')
+		print_link.click()
+		print_link = self.driver.find_element_by_id('print-submit')
+		print_link.click()
+
+		self.driver.get('http://localhost:8000/admin/powers/bond/')
+		print_link = self.driver.find_element_by_link_text('Print Bond')
+		print_link.click()
+		print_link = self.driver.find_element_by_id('print-submit')
+		print_link.click()
 
 	def test_admin(self):
-		##Signin
+		"""Signin"""
 		self.driver.get("http://localhost:8000/admin/login/?next=/admin/")
 
 		self.driver.find_element_by_id('id_username').send_keys(self.super_user['email'])
 		self.driver.find_element_by_id('id_password').send_keys(self.super_user['password'])
 		self.driver.find_element_by_xpath('//input[@value="Log in"]').click()
 
-		###  Make Sure powers inventory shown
+		#  Make Sure powers inventory shown
 		inventory_object = self.driver.find_element_by_id('id_powers_inventory')
 		assert inventory_object
 
-		##Create Powers Batch
+		# Create Powers Batch
 		powers_link = self.driver.find_element_by_link_text('Powers')
 		powers_link.click()
 		batch_link = self.driver.find_element_by_link_text('Create Batch')
@@ -148,5 +169,5 @@ class TestAdmin(StaticLiveServerTestCase):
 
 
 	def tearDown(self):
-		# self.driver.quit()
+		self.driver.quit()
 		pass
