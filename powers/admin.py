@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from datetime import datetime, timedelta
+from datetime import datetime
+from django.utils.timezone import now, timedelta
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 from django.conf.urls import include, url
@@ -72,6 +73,7 @@ class BondInlineAdmin(admin.TabularInline):
         if request.user.is_superuser:
             return False
         return False
+
     def has_delete_permission(self, request, obj=None):
         return False
 
@@ -163,7 +165,7 @@ class PowersAdmin(admin.ModelAdmin):
                 'powers_actions',
                 'currently_used',
             )
-            return qs.filter(end_date_field__gte=datetime.now())
+            return qs.filter(end_date_field__gte=now())
         else:
             ##Don't want to give actions to agents
             self.list_display = (
@@ -176,7 +178,7 @@ class PowersAdmin(admin.ModelAdmin):
             self.readonly_fields = ('date_of_transmission', 'surety_company',
                                     'agent', 'powers_type', 'end_date_field', )
 
-        return qs.filter(agent_id=request.user.id, end_date_field__gte=datetime.now())
+        return qs.filter(agent_id=request.user.id, end_date_field__gte=now())
 
     def currently_used(self, instance):
         bond = Bond.objects.get(powers=instance.id)
@@ -268,11 +270,11 @@ class PowersAdmin(admin.ModelAdmin):
             form = AgentForm(request.POST)
             if form.is_valid():
                 agent = form.cleaned_data['agent']
-                future_date = datetime.now() + timedelta(
+                future_date = now() + timedelta(
                     getattr(settings, 'POWERS_EXPIRATION_TRANSFER'))
                 updated = queryset.update(agent=agent,
                                           end_date_field=future_date,
-                                          start_date_transmission = datetime.now()
+                                          start_date_transmission = now()
                                           )
                 self.message_user(request, 'Success')
                 return
@@ -337,13 +339,13 @@ class BondAdmin(admin.ModelAdmin):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
-                            'bond_actions', 'make_voided', 'deleted_at')
-        else:
+                            'bond_actions', 'make_voided', 'deleted_at', 'times_printed')
+        elif request.user.is_superuser:
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
                             'bond_actions')
-        if not request.user.is_superuser:
+        else:
             self.list_display = ('__str__', 'issuing_datetime',
-                                 'has_been_printed', 'status','bond_actions')
+                                 'has_been_printed', 'status', 'bond_actions')
             return qs.filter(agent_id=request.user.id, deleted_at=None)
         return qs
 
@@ -362,7 +364,7 @@ class BondAdmin(admin.ModelAdmin):
                 id=request.user.id)
             current_power = Powers.objects.filter(id=powers_id)
             allowed_powers = Powers.objects.filter(
-                agent_id=request.user.id, bond__isnull=True, end_date_field__gte=datetime.now())            
+                agent_id=request.user.id, bond__isnull=True, end_date_field__gte=now())
             form.base_fields['powers'].queryset = current_power | allowed_powers
 
             self.readonly_fields = ('has_been_printed', )
@@ -370,7 +372,7 @@ class BondAdmin(admin.ModelAdmin):
 
             current_power = Powers.objects.filter(id=powers_id)
             allowed_powers = Powers.objects.filter(
-                bond__isnull=True, end_date_field__gte=datetime.now()
+                bond__isnull=True, end_date_field__gte=now()
             )
             form.base_fields['powers'].queryset = current_power | allowed_powers
             self.readonly_fields = ('premium', )
@@ -411,7 +413,8 @@ class BondAdmin(admin.ModelAdmin):
         return HttpResponseRedirect(url)
 
     def bond_actions(self, obj):
-        if not obj.has_been_printed:
+        if not obj.has_been_printed or (obj.created_on > (now() - timedelta(hours=24)) and
+                                        obj.times_printed < 3):
             return format_html('<a class="button" href="{}">Print Bond</a>',
                                reverse('admin:bond_print', args=[obj.pk]))
 

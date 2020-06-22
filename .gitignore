@@ -17,3 +17,6 @@ include
 lib
 venv
 .env
+.elasticbeanstalk/app_versions
+mysite
+db.sqlite3

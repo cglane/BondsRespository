@@ -124,10 +124,12 @@ class Powers(models.Model):
 class Bond(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     has_been_printed = models.BooleanField(default=False)
-
+    created_on = models.DateTimeField(auto_now_add=True, editable=False)
+    times_printed = models.IntegerField(default=0, editable=False)
     BOND_STATUSES = (('Pending', 'Pending'), ('Discharged', 'Discharged'), ('Dismissed', 'Dismissed'), ('FLTA', 'FLTA'))
     status = models.CharField(max_length=50, choices=BOND_STATUSES, default='Pending')
     discharded_date = models.DateTimeField(null=True, blank=True)
+    dischard_explanation = models.TextField(null=True, blank=True, help_text="Please provide explanation for discharging bond.")
     defendant = models.ForeignKey(Defendant, on_delete=models.CASCADE)
     voided = models.NullBooleanField(default=False)
     agent = models.ForeignKey(
