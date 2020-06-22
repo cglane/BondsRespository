@@ -73,6 +73,7 @@ class BondInlineAdmin(admin.TabularInline):
         if request.user.is_superuser:
             return False
         return False
+
     def has_delete_permission(self, request, obj=None):
         return False
 
@@ -338,13 +339,13 @@ class BondAdmin(admin.ModelAdmin):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
-                            'bond_actions', 'make_voided', 'deleted_at')
-        else:
+                            'bond_actions', 'make_voided', 'deleted_at', 'times_printed')
+        elif request.user.is_superuser:
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
                             'bond_actions')
-        if not request.user.is_superuser:
+        else:
             self.list_display = ('__str__', 'issuing_datetime',
-                                 'has_been_printed', 'status','bond_actions')
+                                 'has_been_printed', 'status', 'bond_actions')
             return qs.filter(agent_id=request.user.id, deleted_at=None)
         return qs
 
@@ -412,7 +413,8 @@ class BondAdmin(admin.ModelAdmin):
         return HttpResponseRedirect(url)
 
     def bond_actions(self, obj):
-        if not obj.has_been_printed or obj.created_on > (now() - timedelta(hours=24)):
+        if not obj.has_been_printed or (obj.created_on > (now() - timedelta(hours=24)) and
+                                        obj.times_printed < 3):
             return format_html('<a class="button" href="{}">Print Bond</a>',
                                reverse('admin:bond_print', args=[obj.pk]))
 

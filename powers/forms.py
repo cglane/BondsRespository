@@ -7,9 +7,11 @@ from django.conf import settings
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+
 class PowersBatchForm(forms.Form):
     number = forms.IntegerField()
     type = forms.ChoiceField(choices=getattr(settings, 'POWERS_TYPES'))
+
 
 class AgentForm(forms.Form):
     agent = forms.ModelChoiceField(queryset=User.objects.all())
@@ -69,6 +71,7 @@ class BondPrintForm(forms.Form):
     def form_action(self, bond, user):
         bond = Bond.objects.get(id=bond.id)
         bond.has_been_printed = True
+        bond.times_printed += 1
         bond.save()
 
 
