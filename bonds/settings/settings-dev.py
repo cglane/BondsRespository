@@ -132,7 +132,7 @@ if os.environ.get('ENVIRONMENT_NAME') == 'development':
             'PORT': os.environ['RDS_PORT'],
         }
     }
-else:
+elif os.environ.get('ENVIRONMENT_NAME') == 'local':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -143,8 +143,7 @@ else:
             'PORT': '5432',
         }
     }
-
-if 'test' in sys.argv:
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -152,6 +151,7 @@ if 'test' in sys.argv:
 
         }
     }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
