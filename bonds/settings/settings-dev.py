@@ -69,7 +69,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-ADMIN_EMAILS = ['info@shelmoresurety.com']
+ADMIN_EMAILS = ['info@shelmoresurety.com', 'charleslane23@gmail.com']
 EMAIL_HOST_USER = os.environ['BONDS_EMAIL_ADDRESS']
 EMAIL_HOST_PASSWORD = os.environ['BONDS_EMAIL_PASSWORD']
 

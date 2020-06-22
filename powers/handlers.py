@@ -12,3 +12,8 @@ def handle_low_powers(agent, powers):
     subject = "Low Powers Inventory"
     send_mail(subject, low_powers_message, settings.LOGIN_HEADER, recipient_list=settings.ADMIN_EMAILS)
 
+
+def handle_voided_bond(agent, bond, reason_to_void):
+    message = f'{agent} has voided bond: {bond}. Reason: {reason_to_void}'
+    subject = "Voided Bond"
+    send_mail(subject, message, settings.LOGIN_HEADER, recipient_list=settings.ADMIN_EMAILS)
