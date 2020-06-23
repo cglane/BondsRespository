@@ -12,7 +12,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from powers.forms import TransferPowersForm, BondPrintForm, AgentForm, PowersBatchForm
+from powers.forms import TransferPowersForm, BondPrintForm, AgentForm, PowersBatchForm, BondVoidForm
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from powers.utils import create_powers_batch_custom
@@ -310,6 +310,13 @@ class BondAdmin(admin.ModelAdmin):
         ('has_been_printed', DropdownFilter),
     )
 
+    def save_model(self, request, obj, form, change):
+        original_discharged_date = obj._original_discharged_date
+        if change and obj.discharged_date and \
+                (not original_discharged_date or original_discharged_date != obj.discharged_date):
+            obj.discharged_user = request.user
+        super().save_model(request, obj, form, change)
+
     # Hide delete button on edit
     def change_view(self, request, object_id=None, form_url='', extra_context=None):
         return super().change_view(request, object_id, form_url, extra_context={})
@@ -333,6 +340,7 @@ class BondAdmin(admin.ModelAdmin):
             readonly_fields.append('voided')
         if not request.user.is_superuser:
             readonly_fields.append('has_been_printed')
+            readonly_fields.append('discharged_user')
         return readonly_fields
 
     def get_queryset(self, request):
@@ -393,11 +401,6 @@ class BondAdmin(admin.ModelAdmin):
 
         return custom_urls + urls
 
-    def make_voided(self, request, queryset):
-        queryset.update(voided=True)
-    
-    make_voided.short_description = "Set bond to voided"
-
     def make_voided(self, obj):
         if not obj.voided:
             return format_html('<a class="button" href="{}">Make Voided</a>',
@@ -405,12 +408,33 @@ class BondAdmin(admin.ModelAdmin):
 
     def bond_void_view(self, request, bond_id, *args, **kwargs):
         bond = self.get_object(request, bond_id)
-        bond.voided = True
-        bond.save()
+        if request.method != 'POST':
+            form = BondVoidForm()
+        else:
+            form = BondVoidForm(request.POST)
+            if form.is_valid():
+                try:
+                    form.save(bond, request.user)
+                except Exception as e:
+                    # If save() raised, the form will a have a non
+                    # field error containing an informative message.
+                    pass
+                else:
+                    self.message_user(request, 'Success')
+                    url = reverse('admin:powers_bond_changelist', )
+                    return HttpResponseRedirect(url)
 
-        self.message_user(request, 'Success')
-        url = reverse('admin:powers_bond_changelist', )
-        return HttpResponseRedirect(url)
+        context = self.admin_site.each_context(request)
+        context['opts'] = self.model._meta
+        context['form'] = form
+        context['bond'] = bond
+        context['title'] = 'Void Bond'
+
+        return TemplateResponse(
+            request,
+            'admin/account/void_bond_action.html',
+            context,
+        )
 
     def bond_actions(self, obj):
         if not obj.has_been_printed or (obj.created_on > (now() - timedelta(hours=24)) and
