@@ -78,6 +78,14 @@ class TestAdmin(StaticLiveServerTestCase):
 		print_link = self.driver.find_element_by_id('print-submit')
 		print_link.click()
 
+		# Test Request Void
+		self.driver.get('http://localhost:8000/admin/powers/bond/')
+		void_link = self.driver.find_element_by_link_text('Request Void Bond')
+		void_link.click()
+		self.driver.find_element_by_id('id_reason_to_void').send_keys("Hello World")
+		self.driver.find_element_by_xpath('//input[@value="Submit"]').click()
+
+
 	def test_admin(self):
 		"""Signin"""
 		self.driver.get("http://localhost:8000/admin/login/?next=/admin/")

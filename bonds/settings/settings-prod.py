@@ -50,7 +50,7 @@ BOND_PRINT_CONTENT_TWO = 'Authority of such a Attorney-In-Fact is limited to app
 
 BOND_PRINT_CONTENT_THREE = 'and provided this Power-Of-Attorney is filed with the bond and retained as a part of the court records. The said Attorney-In-Fact is hereby authorized to insert in this Power-Of-Attorney the name of the person on whose behalf this bond was given.'
 
-BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this <span class='long-date'>{1}</span>."
+BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this "
 # Application definition
 
 POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
