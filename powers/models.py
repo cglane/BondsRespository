@@ -13,7 +13,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 
 local_tz = pytz.timezone('US/Eastern')
@@ -46,7 +46,11 @@ class SuretyCompany(models.Model):
         return content
 
     def print_content_four(self):
+        # Change based off of bonds post_date field
+
         datetime_object = datetime.now()
+        if self.post_date:
+            datetime_object += timedelta(hours=24)
         todays_date = datetime_object.strftime(
             "%dth day of %B A.D. %Y")
         content = getattr(settings, 'BOND_PRINT_CONTENT_FOUR')
@@ -127,6 +131,8 @@ class Bond(models.Model):
         self._original_discharged_date = self.discharged_date
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    post_date = models.BooleanField(default=False, help_text="If checked the bond's date will be "
+                                                             "set to tomorrow otherwise it will be set for today's date")
     has_been_printed = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True, editable=False)
     times_printed = models.IntegerField(default=0, editable=False)
@@ -157,11 +163,13 @@ class Bond(models.Model):
         blank=True,
         auto_now_add=True,
         help_text="This will automatically be set when bond is printed")
+
     issuing_date = models.DateField(
         null=True,
         blank=True,
         auto_now_add=True,
         help_text="This will automatically be set when bond is printed")
+
     amount = models.FloatField()
     premium = models.FloatField(editable=False)
     bond_fee = models.FloatField()

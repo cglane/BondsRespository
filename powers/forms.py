@@ -2,7 +2,7 @@ from django import forms
 from powers.models import User, Powers, Bond
 import datetime
 from django.conf import settings
-from powers.handlers import handle_voided_bond
+from powers.handlers import handle_voided_bond, handle_voided_request_bond
 
 
 class DateInput(forms.DateInput):
@@ -52,6 +52,26 @@ class TransferPowersForm(forms.Form):
 
         power.start_date_transmission = datetime.datetime.now()
         power.save()
+
+
+class BondRequestVoidForm(forms.Form):
+    reason_to_void = forms.CharField(widget=forms.Textarea )
+
+    def __init__(self, *args, **kwargs):
+        # For testing
+        super(BondRequestVoidForm, self).__init__(*args, **kwargs)
+
+    def form_action(self, bonds, user):
+        bond = Bond.objects.get(id=bonds.id)
+
+        reason_to_void = self.data['reason_to_void']
+        handle_voided_request_bond(user, bond, reason_to_void)
+
+    def save(self, bond, user):
+        try:
+            self.form_action(bond, user)
+        except:
+            raise forms.ValidationError("Failed to save form.")
 
 
 class BondVoidForm(forms.Form):
