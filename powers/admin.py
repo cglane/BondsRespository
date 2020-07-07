@@ -45,6 +45,7 @@ class SuretyAdmin(admin.ModelAdmin):
 class BondFileInline(admin.TabularInline):
     model = BondFile
 
+
 class GroupAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     ordering = ('name',)
@@ -299,16 +300,19 @@ class PowersAdmin(admin.ModelAdmin):
 
 
 class BondAdmin(admin.ModelAdmin):
-    inlines= [ BondFileInline,]
+    inlines = [ BondFileInline,]
 
     list_display = ('__str__', 'issuing_datetime',
-                         'has_been_printed', 'bond_actions')
-    search_fields = ( 'powers__powers_type',  'agent__first_name',
-                      'agent__last_name', 'defendant__last_name', 'powers__id')
+                    'has_been_printed', 'bond_actions')
+    search_fields = ('powers__powers_type',  'agent__first_name',
+                     'agent__last_name', 'defendant__last_name', 'powers__id')
     list_filter = (
         ('status', DropdownFilter),
         ('has_been_printed', DropdownFilter),
     )
+
+    class Media:
+        js = ('js/base.js', )
 
     def save_model(self, request, obj, form, change):
         original_discharged_date = obj._original_discharged_date
@@ -347,10 +351,10 @@ class BondAdmin(admin.ModelAdmin):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
-                            'bond_actions', 'make_voided', 'deleted_at', 'times_printed')
+                                 'bond_actions', 'make_voided', 'deleted_at', 'times_printed')
         elif request.user.is_superuser:
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
-                            'bond_actions')
+                                 'bond_actions')
         else:
             self.list_display = ('__str__', 'issuing_datetime',
                                  'has_been_printed', 'status', 'bond_actions')
@@ -385,7 +389,6 @@ class BondAdmin(admin.ModelAdmin):
             form.base_fields['powers'].queryset = current_power | allowed_powers
             self.readonly_fields = ('premium', )
         return form
-
 
     def get_urls(self):
         urls = super(BondAdmin, self).get_urls()
