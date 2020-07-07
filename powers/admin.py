@@ -6,20 +6,21 @@ from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 from django.conf.urls import include, url
 from django.shortcuts import redirect
-from itertools import chain
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from powers.forms import TransferPowersForm, BondPrintForm, AgentForm, PowersBatchForm, BondVoidForm
+from powers.forms import (
+    BondRequestVoidForm, TransferPowersForm,
+    BondPrintForm, AgentForm,
+    PowersBatchForm, BondVoidForm)
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from powers.utils import create_powers_batch_custom
 import pytz
 from django.shortcuts import render
 from django_admin_listfilter_dropdown.filters import (
-    DropdownFilter, ChoiceDropdownFilter, RelatedDropdownFilter
+    DropdownFilter
 )
 from powers.models import (
     SuretyCompany,
@@ -37,6 +38,7 @@ local_tz = pytz.timezone('US/Eastern')
 custom_admin_site.site_header = 'Shelmore Surety Admin'
 custom_admin_site.index_title = 'Shelmore Surety Admin'
 custom_admin_site.site_title = 'Shelmore Surety Admin'
+
 
 class SuretyAdmin(admin.ModelAdmin):
     pass
@@ -303,7 +305,7 @@ class BondAdmin(admin.ModelAdmin):
     inlines = [ BondFileInline,]
 
     list_display = ('__str__', 'issuing_datetime',
-                    'has_been_printed', 'bond_actions')
+                    'has_been_printed', 'bond_actions_one')
     search_fields = ('powers__powers_type',  'agent__first_name',
                      'agent__last_name', 'defendant__last_name', 'powers__id')
     list_filter = (
@@ -351,13 +353,13 @@ class BondAdmin(admin.ModelAdmin):
         qs = super(BondAdmin, self).get_queryset(request)
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
-                                 'bond_actions', 'make_voided', 'deleted_at', 'times_printed')
+                                 'bond_actions_one', 'make_voided', 'deleted_at', 'times_printed')
         elif request.user.is_superuser:
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
-                                 'bond_actions')
+                                 'bond_actions_one')
         else:
             self.list_display = ('__str__', 'issuing_datetime',
-                                 'has_been_printed', 'status', 'bond_actions')
+                                 'has_been_printed', 'status', 'bond_actions_one', 'bond_actions_two')
             return qs.filter(agent_id=request.user.id, deleted_at=None)
         return qs
 
@@ -399,7 +401,10 @@ class BondAdmin(admin.ModelAdmin):
                 name='bond_print'),
             url(r'^(?P<bond_id>.+)/bond_void_view/$',
                 self.admin_site.admin_view(self.bond_void_view),
-                name='bond_void_view'),                
+                name='bond_void_view'),
+            url(r'^(?P<bond_id>.+)/request_void_bond/$',
+                self.admin_site.admin_view(self.request_void_bond),
+                name='request_void_bond'),
         ]
 
         return custom_urls + urls
@@ -439,14 +444,52 @@ class BondAdmin(admin.ModelAdmin):
             context,
         )
 
-    def bond_actions(self, obj):
+    def bond_actions_one(self, obj):
         if not obj.has_been_printed or (obj.created_on > (now() - timedelta(hours=24)) and
                                         obj.times_printed < 3):
             return format_html('<a class="button" href="{}">Print Bond</a>',
                                reverse('admin:bond_print', args=[obj.pk]))
 
-    bond_actions.short_description = 'Bond Actions'
-    bond_actions.all_tags = True
+    bond_actions_one.short_description = 'Bond Print'
+    bond_actions_one.all_tags = True
+
+    def bond_actions_two(self, obj):
+        if not obj.has_been_printed or (obj.created_on > (now() - timedelta(hours=24)) and
+                                        obj.times_printed < 3):
+            return format_html('<a class="button" href="{}">Request Void Bond</a>',
+                               reverse('admin:request_void_bond', args=[obj.pk]))
+    bond_actions_two.short_description = 'Request Void Bond'
+    bond_actions_two.all_tags = True
+
+    def request_void_bond(self, request, bond_id):
+        bond = self.get_object(request, bond_id)
+        if request.method != 'POST':
+            form = BondRequestVoidForm()
+        else:
+            form = BondRequestVoidForm(request.POST)
+            if form.is_valid():
+                try:
+                    form.save(bond, request.user)
+                except Exception as e:
+                    # If save() raised, the form will a have a non
+                    # field error containing an informative message.
+                    pass
+                else:
+                    self.message_user(request, 'Success')
+                    url = reverse('admin:powers_bond_changelist', )
+                    return HttpResponseRedirect(url)
+
+        context = self.admin_site.each_context(request)
+        context['opts'] = self.model._meta
+        context['form'] = form
+        context['bond'] = bond
+        context['title'] = 'Request Void Bond'
+
+        return TemplateResponse(
+            request,
+            'admin/account/void_bond_action.html',
+            context,
+        )
 
     def bond_print(self, request, bond_id, *args, **kwargs):
 
