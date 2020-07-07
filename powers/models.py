@@ -47,14 +47,8 @@ class SuretyCompany(models.Model):
 
     def print_content_four(self):
         # Change based off of bonds post_date field
-
-        datetime_object = datetime.now()
-        if self.post_date:
-            datetime_object += timedelta(hours=24)
-        todays_date = datetime_object.strftime(
-            "%dth day of %B A.D. %Y")
         content = getattr(settings, 'BOND_PRINT_CONTENT_FOUR')
-        return content.format(self.title, todays_date)
+        return content.format(self.title)
 
 
 class User(AbstractUser):
@@ -189,8 +183,16 @@ class Bond(models.Model):
         self.save()
 
     def delete_selected(self):
-        print('selected')
         pass
+
+    def print_date(self):
+        datetime_object = datetime.now()
+        if self.post_date:
+            datetime_object += timedelta(hours=24)
+        todays_date = datetime_object.strftime(
+            "%dth day of %B A.D. %Y")
+        return todays_date
+
     def save(self, *args, **kwargs):
         # Check make sure amount is not greater than the powers.
         if self.amount > float(self.powers.powers_type):
