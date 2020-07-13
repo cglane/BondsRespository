@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mxvt5@g-&cszmt91m(u7+_%l&yd_i8psx*f*e8d0a))%wd3t-#'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -54,7 +54,8 @@ BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to 
 # Application definition
 
 POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
-                ('25000.00', '25000.00'), ('50000.00', '50000.00'),('99000.00', '99000.00'),
+                ('25000.00', '25000.00'), ('50000.00', '50000.00'),
+                ('99000.00', '99000.00'),
                 ('100000.00', '100000.00'), ('150000.00', '150000.00'),
                 ('250000.00', '250000.00'), ('500000.00', '500000.00'))
 
@@ -80,7 +81,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes', 'django.contrib.sessions',
     'django.contrib.messages', 'django.contrib.staticfiles',
     'powers.apps.AppConfig', 'powers.apps.CustomAdminConfig',
-    'storages','report_builder', 'django_admin_listfilter_dropdown',
+    'storages', 'report_builder', 'django_admin_listfilter_dropdown',
 
 ]
 
@@ -130,8 +131,8 @@ if os.environ.get('LOCATION_NAME') == 'local':
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'ebdb',
             'USER': 'postgres',
-            'PASSWORD': os.environ.get('BOND_PASSWORD'),
-            'HOST': os.environ.get('BOND_HOST'),
+            'PASSWORD': os.environ.get('BOND_PROD_PASSWORD'),
+            'HOST': os.environ.get('BOND_PROD_HOST'),
             'PORT': '5432',
         }
     }
@@ -190,7 +191,6 @@ USE_TZ = True
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-
 
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
