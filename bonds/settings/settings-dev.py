@@ -132,7 +132,8 @@ if os.environ.get('ENVIRONMENT_NAME') == 'development':
             'PORT': os.environ['RDS_PORT'],
         }
     }
-elif os.environ.get('ENVIRONMENT_NAME') == 'local':
+elif os.environ.get('ENVIRONMENT_NAME') == 'local_remote':
+    print('here')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -143,7 +144,8 @@ elif os.environ.get('ENVIRONMENT_NAME') == 'local':
             'PORT': '5432',
         }
     }
-else:
+elif os.environ.get('ENVIRONMENT_NAME') == 'local':
+    print('ere')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
