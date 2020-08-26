@@ -153,13 +153,14 @@ class PowersAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
-    def get_queryset(self, request):
-        """
-        Only want powers that have end date in future to appear
-        """
-        qs = super(PowersAdmin, self).get_queryset(request)
+    def changelist_view(self, request, extra_context=None):
+        self.list_display = ()
+        extra_context = extra_context or {}
+        allow_bulk_create = False
+        if request.user.username in getattr(settings, 'VOID_WHITELIST'):
+            allow_bulk_create = True
+        extra_context['allow_bulk_create'] = allow_bulk_create
         if request.user.is_superuser:
-
             self.list_display = (
                 '__str__',
                 'agent_name',
@@ -168,7 +169,6 @@ class PowersAdmin(admin.ModelAdmin):
                 'powers_actions',
                 'currently_used',
             )
-            return qs.filter(end_date_field__gte=now())
         else:
             ##Don't want to give actions to agents
             self.list_display = (
@@ -180,8 +180,19 @@ class PowersAdmin(admin.ModelAdmin):
             )
             self.readonly_fields = ('date_of_transmission', 'surety_company',
                                     'agent', 'powers_type', 'end_date_field', )
+        return super(PowersAdmin, self).changelist_view(request, extra_context=extra_context)
 
-        return qs.filter(agent_id=request.user.id, end_date_field__gte=now())
+    def get_queryset(self, request):
+        """
+        Only want powers that have end date in future to appear
+        """
+        qs = super(PowersAdmin, self).get_queryset(request)
+        # There seems to be a bug with list display where it isn't updated
+        # without refreshing page
+        if request.user.is_superuser:
+            return qs.filter(end_date_field__gte=now())
+        else:
+            return qs.filter(agent_id=request.user.id, end_date_field__gte=now())
 
     def currently_used(self, instance):
         bond = Bond.objects.get(powers=instance.id)
@@ -291,21 +302,9 @@ class PowersAdmin(admin.ModelAdmin):
 
     actions = [transfer_group, ]
 
-    # Pass allow to template
-    def changelist_view(self, request, extra_context=None):
-        extra_context = extra_context or {}
-        allow_bulk_create = False
-        if request.user.username in getattr(settings, 'VOID_WHITELIST'):
-            allow_bulk_create = True
-        extra_context['allow_bulk_create'] = allow_bulk_create
-        return super(PowersAdmin, self).changelist_view(request, extra_context=extra_context)
-
 
 class BondAdmin(admin.ModelAdmin):
     inlines = [ BondFileInline,]
-
-    list_display = ('__str__', 'issuing_datetime',
-                    'has_been_printed', 'bond_actions_one')
     search_fields = ('powers__powers_type',  'agent__first_name',
                      'agent__last_name', 'defendant__last_name', 'powers__id')
     list_filter = (
@@ -349,8 +348,8 @@ class BondAdmin(admin.ModelAdmin):
             readonly_fields.append('discharged_user')
         return readonly_fields
 
-    def get_queryset(self, request):
-        qs = super(BondAdmin, self).get_queryset(request)
+    def changelist_view(self, request, **kwargs):
+        self.list_display = ()
         if request.user.username in getattr(settings, 'VOID_WHITELIST'):
             self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
                                  'bond_actions_one', 'make_voided', 'deleted_at', 'times_printed')
@@ -360,8 +359,14 @@ class BondAdmin(admin.ModelAdmin):
         else:
             self.list_display = ('__str__', 'issuing_datetime',
                                  'has_been_printed', 'status', 'bond_actions_one', 'bond_actions_two')
+        return super(BondAdmin, self).changelist_view(request, **kwargs)
+
+    def get_queryset(self, request):
+        qs = super(BondAdmin, self).get_queryset(request)
+        if not request.user.is_superuser:
             return qs.filter(agent_id=request.user.id, deleted_at=None)
-        return qs
+        else:
+            return qs
 
     def get_form(self, request, obj=None, **kwargs):
         """
