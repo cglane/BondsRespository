@@ -53,9 +53,10 @@ BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to 
 # Application definition
 
 VOID_WHITELIST = ['charleslane23@gmail.com',
+                  'michelle.armstrong@sinklerbonding.com',
                   'mfarmer@thefarmerlawfirm.com',
                   'lowndes.sinkler@sinklerbonding.com',
-                  'hward@shelmoresurety.com',
+                  'lsinkler@sinklerbonding.com' 
                   'nfrierson@shelmoresurety.com'
                   ]
 
