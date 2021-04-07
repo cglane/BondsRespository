@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from datetime import datetime, timedelta
+from datetime import datetime
+from django.utils.timezone import now, timedelta
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 from django.conf.urls import include, url
 from django.shortcuts import redirect
-from itertools import chain
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from powers.forms import TransferPowersForm, BondPrintForm, AgentForm, PowersBatchForm
+from powers.forms import (
+    BondRequestVoidForm, TransferPowersForm,
+    BondPrintForm, AgentForm,
+    PowersBatchForm, BondVoidForm)
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from powers.utils import create_powers_batch_custom
 import pytz
 from django.shortcuts import render
 from django_admin_listfilter_dropdown.filters import (
-    DropdownFilter, ChoiceDropdownFilter, RelatedDropdownFilter
+    DropdownFilter
 )
 from powers.models import (
     SuretyCompany,
@@ -37,12 +39,14 @@ custom_admin_site.site_header = 'Shelmore Surety Admin'
 custom_admin_site.index_title = 'Shelmore Surety Admin'
 custom_admin_site.site_title = 'Shelmore Surety Admin'
 
+
 class SuretyAdmin(admin.ModelAdmin):
     pass
 
 
 class BondFileInline(admin.TabularInline):
     model = BondFile
+
 
 class GroupAdmin(admin.ModelAdmin):
     search_fields = ('name',)
@@ -72,6 +76,7 @@ class BondInlineAdmin(admin.TabularInline):
         if request.user.is_superuser:
             return False
         return False
+
     def has_delete_permission(self, request, obj=None):
         return False
 
@@ -148,13 +153,15 @@ class PowersAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
-    def get_queryset(self, request):
-        """
-        Only want powers that have end date in future to appear
-        """
-        qs = super(PowersAdmin, self).get_queryset(request)
+    def changelist_view(self, request, extra_context=None):
+        self.list_display = ()
+        extra_context = extra_context or {}
+        allow_bulk_create = False
+        if request.user.username in getattr(settings, 'VOID_WHITELIST') \
+                or request.user.email_address in getattr(settings, 'VOID_WHITELIST') :
+            allow_bulk_create = True
+        extra_context['allow_bulk_create'] = allow_bulk_create
         if request.user.is_superuser:
-
             self.list_display = (
                 '__str__',
                 'agent_name',
@@ -163,7 +170,6 @@ class PowersAdmin(admin.ModelAdmin):
                 'powers_actions',
                 'currently_used',
             )
-            return qs.filter(end_date_field__gte=datetime.now())
         else:
             ##Don't want to give actions to agents
             self.list_display = (
@@ -175,8 +181,19 @@ class PowersAdmin(admin.ModelAdmin):
             )
             self.readonly_fields = ('date_of_transmission', 'surety_company',
                                     'agent', 'powers_type', 'end_date_field', )
+        return super(PowersAdmin, self).changelist_view(request, extra_context=extra_context)
 
-        return qs.filter(agent_id=request.user.id, end_date_field__gte=datetime.now())
+    def get_queryset(self, request):
+        """
+        Only want powers that have end date in future to appear
+        """
+        qs = super(PowersAdmin, self).get_queryset(request)
+        # There seems to be a bug with list display where it isn't updated
+        # without refreshing page
+        if request.user.is_superuser:
+            return qs.filter(end_date_field__gte=now())
+        else:
+            return qs.filter(agent_id=request.user.id, end_date_field__gte=now())
 
     def currently_used(self, instance):
         bond = Bond.objects.get(powers=instance.id)
@@ -268,11 +285,11 @@ class PowersAdmin(admin.ModelAdmin):
             form = AgentForm(request.POST)
             if form.is_valid():
                 agent = form.cleaned_data['agent']
-                future_date = datetime.now() + timedelta(
+                future_date = now() + timedelta(
                     getattr(settings, 'POWERS_EXPIRATION_TRANSFER'))
                 updated = queryset.update(agent=agent,
                                           end_date_field=future_date,
-                                          start_date_transmission = datetime.now()
+                                          start_date_transmission = now()
                                           )
                 self.message_user(request, 'Success')
                 return
@@ -286,27 +303,25 @@ class PowersAdmin(admin.ModelAdmin):
 
     actions = [transfer_group, ]
 
-    # Pass allow to template
-    def changelist_view(self, request, extra_context=None):
-        extra_context = extra_context or {}
-        allow_bulk_create = False
-        if request.user.username in getattr(settings, 'VOID_WHITELIST'):
-            allow_bulk_create = True
-        extra_context['allow_bulk_create'] = allow_bulk_create
-        return super(PowersAdmin, self).changelist_view(request, extra_context=extra_context)
-
 
 class BondAdmin(admin.ModelAdmin):
-    inlines= [ BondFileInline,]
-
-    list_display = ('__str__', 'issuing_datetime',
-                         'has_been_printed', 'bond_actions')
-    search_fields = ( 'powers__powers_type',  'agent__first_name',
-                      'agent__last_name', 'defendant__last_name', 'powers__id')
+    inlines = [ BondFileInline,]
+    search_fields = ('powers__powers_type',  'agent__first_name',
+                     'agent__last_name', 'defendant__last_name', 'powers__id')
     list_filter = (
         ('status', DropdownFilter),
         ('has_been_printed', DropdownFilter),
     )
+
+    class Media:
+        js = ('js/base.js', )
+
+    def save_model(self, request, obj, form, change):
+        original_discharged_date = obj._original_discharged_date
+        if change and obj.discharged_date and \
+                (not original_discharged_date or original_discharged_date != obj.discharged_date):
+            obj.discharged_user = request.user
+        super().save_model(request, obj, form, change)
 
     # Hide delete button on edit
     def change_view(self, request, object_id=None, form_url='', extra_context=None):
@@ -331,21 +346,28 @@ class BondAdmin(admin.ModelAdmin):
             readonly_fields.append('voided')
         if not request.user.is_superuser:
             readonly_fields.append('has_been_printed')
+            readonly_fields.append('discharged_user')
         return readonly_fields
+
+    def changelist_view(self, request, **kwargs):
+        self.list_display = ()
+        if request.user.username in getattr(settings, 'VOID_WHITELIST'):
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
+                                 'bond_actions_one', 'make_voided', 'deleted_at', 'times_printed')
+        elif request.user.is_superuser:
+            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
+                                 'bond_actions_one')
+        else:
+            self.list_display = ('__str__', 'issuing_datetime',
+                                 'has_been_printed', 'status', 'bond_actions_one', 'bond_actions_two')
+        return super(BondAdmin, self).changelist_view(request, **kwargs)
 
     def get_queryset(self, request):
         qs = super(BondAdmin, self).get_queryset(request)
-        if request.user.username in getattr(settings, 'VOID_WHITELIST'):
-            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status','has_been_printed',
-                            'bond_actions', 'make_voided', 'deleted_at')
-        else:
-            self.list_display = ('__str__', 'agent', 'issuing_datetime', 'voided', 'status', 'has_been_printed',
-                            'bond_actions')
         if not request.user.is_superuser:
-            self.list_display = ('__str__', 'issuing_datetime',
-                                 'has_been_printed', 'status','bond_actions')
             return qs.filter(agent_id=request.user.id, deleted_at=None)
-        return qs
+        else:
+            return qs
 
     def get_form(self, request, obj=None, **kwargs):
         """
@@ -362,7 +384,7 @@ class BondAdmin(admin.ModelAdmin):
                 id=request.user.id)
             current_power = Powers.objects.filter(id=powers_id)
             allowed_powers = Powers.objects.filter(
-                agent_id=request.user.id, bond__isnull=True, end_date_field__gte=datetime.now())            
+                agent_id=request.user.id, bond__isnull=True, end_date_field__gte=now())
             form.base_fields['powers'].queryset = current_power | allowed_powers
 
             self.readonly_fields = ('has_been_printed', )
@@ -370,12 +392,11 @@ class BondAdmin(admin.ModelAdmin):
 
             current_power = Powers.objects.filter(id=powers_id)
             allowed_powers = Powers.objects.filter(
-                bond__isnull=True, end_date_field__gte=datetime.now()
+                bond__isnull=True, end_date_field__gte=now()
             )
             form.base_fields['powers'].queryset = current_power | allowed_powers
             self.readonly_fields = ('premium', )
         return form
-
 
     def get_urls(self):
         urls = super(BondAdmin, self).get_urls()
@@ -386,15 +407,13 @@ class BondAdmin(admin.ModelAdmin):
                 name='bond_print'),
             url(r'^(?P<bond_id>.+)/bond_void_view/$',
                 self.admin_site.admin_view(self.bond_void_view),
-                name='bond_void_view'),                
+                name='bond_void_view'),
+            url(r'^(?P<bond_id>.+)/request_void_bond/$',
+                self.admin_site.admin_view(self.request_void_bond),
+                name='request_void_bond'),
         ]
 
         return custom_urls + urls
-
-    def make_voided(self, request, queryset):
-        queryset.update(voided=True)
-    
-    make_voided.short_description = "Set bond to voided"
 
     def make_voided(self, obj):
         if not obj.voided:
@@ -403,20 +422,80 @@ class BondAdmin(admin.ModelAdmin):
 
     def bond_void_view(self, request, bond_id, *args, **kwargs):
         bond = self.get_object(request, bond_id)
-        bond.voided = True
-        bond.save()
+        if request.method != 'POST':
+            form = BondVoidForm()
+        else:
+            form = BondVoidForm(request.POST)
+            if form.is_valid():
+                try:
+                    form.save(bond, request.user)
+                except Exception as e:
+                    # If save() raised, the form will a have a non
+                    # field error containing an informative message.
+                    pass
+                else:
+                    self.message_user(request, 'Success')
+                    url = reverse('admin:powers_bond_changelist', )
+                    return HttpResponseRedirect(url)
 
-        self.message_user(request, 'Success')
-        url = reverse('admin:powers_bond_changelist', )
-        return HttpResponseRedirect(url)
+        context = self.admin_site.each_context(request)
+        context['opts'] = self.model._meta
+        context['form'] = form
+        context['bond'] = bond
+        context['title'] = 'Void Bond'
 
-    def bond_actions(self, obj):
-        if not obj.has_been_printed:
+        return TemplateResponse(
+            request,
+            'admin/account/void_bond_action.html',
+            context,
+        )
+
+    def bond_actions_one(self, obj):
+        if not obj.has_been_printed or (obj.created_on > (now() - timedelta(hours=24)) and
+                                        obj.times_printed < 3):
             return format_html('<a class="button" href="{}">Print Bond</a>',
                                reverse('admin:bond_print', args=[obj.pk]))
 
-    bond_actions.short_description = 'Bond Actions'
-    bond_actions.all_tags = True
+    bond_actions_one.short_description = 'Bond Print'
+    bond_actions_one.all_tags = True
+
+    def bond_actions_two(self, obj):
+        if not obj.has_been_printed or (obj.created_on > (now() - timedelta(hours=24)) and
+                                        obj.times_printed < 3):
+            return format_html('<a class="button" href="{}">Request Void Bond</a>',
+                               reverse('admin:request_void_bond', args=[obj.pk]))
+    bond_actions_two.short_description = 'Request Void Bond'
+    bond_actions_two.all_tags = True
+
+    def request_void_bond(self, request, bond_id):
+        bond = self.get_object(request, bond_id)
+        if request.method != 'POST':
+            form = BondRequestVoidForm()
+        else:
+            form = BondRequestVoidForm(request.POST)
+            if form.is_valid():
+                try:
+                    form.save(bond, request.user)
+                except Exception as e:
+                    # If save() raised, the form will a have a non
+                    # field error containing an informative message.
+                    pass
+                else:
+                    self.message_user(request, 'Success')
+                    url = reverse('admin:powers_bond_changelist', )
+                    return HttpResponseRedirect(url)
+
+        context = self.admin_site.each_context(request)
+        context['opts'] = self.model._meta
+        context['form'] = form
+        context['bond'] = bond
+        context['title'] = 'Request Void Bond'
+
+        return TemplateResponse(
+            request,
+            'admin/account/void_bond_action.html',
+            context,
+        )
 
     def bond_print(self, request, bond_id, *args, **kwargs):
 

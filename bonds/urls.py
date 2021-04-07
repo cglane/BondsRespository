@@ -21,10 +21,14 @@ from django.contrib.auth.views import login
 from django.views.generic.base import RedirectView
 from django.core.urlresolvers import reverse
 from powers.custom_admin import custom_admin_site
+from django.http import HttpResponse
 
+def return200(request):
+    return HttpResponse(status=200)
 
 urlpatterns = [
     ## Force page to go to admin site
+    url(r'^200', return200),
     url(r'^$', RedirectView.as_view(url='/admin')),
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     url(

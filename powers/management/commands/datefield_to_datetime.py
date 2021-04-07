@@ -18,13 +18,12 @@ from powers.models import (
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 class Command(BaseCommand):
-	def handle(self, *args, **options):
-		bonds = Bond.objects.all()
-		for item in bonds:
-			print(item.issuing_date,'item')
-			print(item.issuing_datetime,'datetime')
-			date_val = item.issuing_date
-			if not date_val is None:
-				item.issuing_datetime = datetime.combine(date_val, datetime.min.time())
-				# item.save()
+    def handle(self, *args, **options):
+        bonds = Bond.objects.all()
+        for item in bonds:
+            date_val = item.issuing_date
+            if not date_val is None:
+                item.issuing_datetime = datetime.combine(date_val, datetime.min.time())
+            # item.save()

@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import sys
+from dotenv import load_dotenv, find_dotenv
+if os.environ.get('ENVIRONMENT_NAME') != 'development':
+    load_dotenv()
+
 def location(x):
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), x)
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,14 +49,15 @@ BOND_PRINT_CONTENT_TWO = 'Authority of such a Attorney-In-Fact is limited to app
 
 BOND_PRINT_CONTENT_THREE = 'and provided this Power-Of-Attorney is filed with the bond and retained as a part of the court records. The said Attorney-In-Fact is hereby authorized to insert in this Power-Of-Attorney the name of the person on whose behalf this bond was given.'
 
-BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this <span class='long-date'>{1}</span>."
+BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this "
 # Application definition
 
 VOID_WHITELIST = ['charleslane23@gmail.com',
+                  'michelle.armstrong@sinklerbonding.com',
                   'mfarmer@thefarmerlawfirm.com',
                   'lowndes.sinkler@sinklerbonding.com',
-                  'hward@shelmoresurety.com',
-                  'lshirley@shelmoresurety.com',
+                  'lsinkler@sinklerbonding.com' 
+                  'nfrierson@shelmoresurety.com'
                   ]
 
 POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
@@ -66,7 +70,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-ADMIN_EMAILS = ['lshirley@shelmoresurety.com']
+ADMIN_EMAILS = ['info@shelmoresurety.com', 'charleslane23@gmail.com']
 EMAIL_HOST_USER = os.environ['BONDS_EMAIL_ADDRESS']
 EMAIL_HOST_PASSWORD = os.environ['BONDS_EMAIL_PASSWORD']
 
@@ -129,7 +133,7 @@ if os.environ.get('ENVIRONMENT_NAME') == 'development':
             'PORT': os.environ['RDS_PORT'],
         }
     }
-else:
+elif os.environ.get('ENVIRONMENT_NAME') == 'local':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -140,9 +144,7 @@ else:
             'PORT': '5432',
         }
     }
-
-if 'test' in sys.argv:
-    print('sys')
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -150,6 +152,7 @@ if 'test' in sys.argv:
 
         }
     }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -189,12 +192,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-# STATIC_ROOT = location('public/static')
+# STATIC_ROOT = location('/static')
 # STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "..", "static"),
 )
-
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID_BONDS')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY_BONDS')
@@ -215,5 +217,4 @@ STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-#
 

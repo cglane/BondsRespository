@@ -13,7 +13,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 
 local_tz = pytz.timezone('US/Eastern')
@@ -46,11 +46,9 @@ class SuretyCompany(models.Model):
         return content
 
     def print_content_four(self):
-        datetime_object = datetime.now()
-        todays_date = datetime_object.strftime(
-            "%dth day of %B A.D. %Y")
+        # Change based off of bonds post_date field
         content = getattr(settings, 'BOND_PRINT_CONTENT_FOUR')
-        return content.format(self.title, todays_date)
+        return content.format(self.title)
 
 
 class User(AbstractUser):
@@ -122,13 +120,27 @@ class Powers(models.Model):
 
 
 class Bond(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    has_been_printed = models.BooleanField(default=False)
+    def __init__(self, *args, **kwargs):
+        super(Bond, self).__init__(*args, **kwargs)
+        self._original_discharged_date = self.discharged_date
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    post_date = models.BooleanField(default=False, help_text="If checked the bond's date will be "
+                                                             "set to tomorrow otherwise it will be set for today's date")
+    has_been_printed = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True, editable=False)
+    times_printed = models.IntegerField(default=0, editable=False)
     BOND_STATUSES = (('Pending', 'Pending'), ('Discharged', 'Discharged'), ('Dismissed', 'Dismissed'), ('FLTA', 'FLTA'))
     status = models.CharField(max_length=50, choices=BOND_STATUSES, default='Pending')
-    discharded_date = models.DateTimeField(null=True, blank=True)
-
+    discharged_date = models.DateTimeField(null=True, blank=True)
+    discharged_explanation = models.TextField(null=True, blank=True, help_text="Please provide explanation for discharging bond.")
+    discharged_user = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
+    )
     defendant = models.ForeignKey(Defendant, on_delete=models.CASCADE)
     voided = models.NullBooleanField(default=False)
     agent = models.ForeignKey(
@@ -145,11 +157,13 @@ class Bond(models.Model):
         blank=True,
         auto_now_add=True,
         help_text="This will automatically be set when bond is printed")
+
     issuing_date = models.DateField(
         null=True,
         blank=True,
         auto_now_add=True,
         help_text="This will automatically be set when bond is printed")
+
     amount = models.FloatField()
     premium = models.FloatField(editable=False)
     bond_fee = models.FloatField()
@@ -169,8 +183,16 @@ class Bond(models.Model):
         self.save()
 
     def delete_selected(self):
-        print('selected')
         pass
+
+    def print_date(self):
+        datetime_object = datetime.now()
+        if self.post_date:
+            datetime_object += timedelta(hours=24)
+        todays_date = datetime_object.strftime(
+            "%dth day of %B A.D. %Y")
+        return todays_date
+
     def save(self, *args, **kwargs):
         # Check make sure amount is not greater than the powers.
         if self.amount > float(self.powers.powers_type):

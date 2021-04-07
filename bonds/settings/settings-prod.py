@@ -50,7 +50,7 @@ BOND_PRINT_CONTENT_TWO = 'Authority of such a Attorney-In-Fact is limited to app
 
 BOND_PRINT_CONTENT_THREE = 'and provided this Power-Of-Attorney is filed with the bond and retained as a part of the court records. The said Attorney-In-Fact is hereby authorized to insert in this Power-Of-Attorney the name of the person on whose behalf this bond was given.'
 
-BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this <span class='long-date'>{1}</span>."
+BOND_PRINT_CONTENT_FOUR = "IN WITNESS WHEREOF, {0} has caused these presents to be signed by it's duly authorized officer, proper for the purpose and its corporate seal to be herunto affixed this "
 # Application definition
 
 POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
@@ -59,10 +59,11 @@ POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
                 ('250000.00', '250000.00'), ('500000.00', '500000.00'))
 
 VOID_WHITELIST = ['charleslane23@gmail.com',
+                  'michelle.armstrong@sinklerbonding.com',
                   'mfarmer@thefarmerlawfirm.com',
                   'lowndes.sinkler@sinklerbonding.com',
-                  'hward@shelmoresurety.com',
-                  'lshirley@shelmoresurety.com',
+                  'lsinkler@sinklerbonding.com' 
+                  'nfrierson@shelmoresurety.com'
                   ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -70,7 +71,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-ADMIN_EMAILS = ['lshirley@shelmoresurety.com']
+ADMIN_EMAILS = ['info@shelmoresurety.com']
 EMAIL_HOST_USER = os.environ['BONDS_EMAIL_ADDRESS']
 EMAIL_HOST_PASSWORD = os.environ['BONDS_EMAIL_PASSWORD']
 
