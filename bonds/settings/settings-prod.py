@@ -59,10 +59,10 @@ POWERS_TYPES = (('5000.00', '5000.00'), ('15000.00', '15000.00'),
                 ('250000.00', '250000.00'), ('500000.00', '500000.00'))
 
 VOID_WHITELIST = ['charleslane23@gmail.com',
+                  'michelle.armstrong@sinklerbonding.com',
                   'mfarmer@thefarmerlawfirm.com',
                   'lowndes.sinkler@sinklerbonding.com',
-                  'hward@shelmoresurety.com',
-                  'lshirley@shelmoresurety.com',
+                  'lsinkler@sinklerbonding.com' 
                   'nfrierson@shelmoresurety.com'
                   ]
 
