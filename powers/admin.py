@@ -157,8 +157,9 @@ class PowersAdmin(admin.ModelAdmin):
         self.list_display = ()
         extra_context = extra_context or {}
         allow_bulk_create = False
+        print(request.user, 'user')
         if request.user.username in getattr(settings, 'VOID_WHITELIST') \
-                or request.user.email_address in getattr(settings, 'VOID_WHITELIST') :
+                or request.user.email in getattr(settings, 'VOID_WHITELIST') :
             allow_bulk_create = True
         extra_context['allow_bulk_create'] = allow_bulk_create
         if request.user.is_superuser:
