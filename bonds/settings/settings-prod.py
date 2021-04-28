@@ -62,7 +62,7 @@ VOID_WHITELIST = ['charleslane23@gmail.com',
                   'michelle.armstrong@sinklerbonding.com',
                   'mfarmer@thefarmerlawfirm.com',
                   'lowndes.sinkler@sinklerbonding.com',
-                  'lsinkler@sinklerbonding.com' 
+                  'lsinkler@sinklerbonding.com',
                   'nfrierson@shelmoresurety.com'
                   ]
 
