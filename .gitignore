@@ -19,3 +19,4 @@ venv
 .elasticbeanstalk/app_versions
 mysite
 db.sqlite3
+/static/2022
